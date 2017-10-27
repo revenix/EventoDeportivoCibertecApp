@@ -13,45 +13,44 @@ using EDCibertecAppWebApiRest;
 
 namespace EDCibertecAppWebApiRest.Controllers
 {
-    public class tb_usuarioController : ApiController
+    public class usuariosController : ApiController
     {
         private EventoDeportivoCibertecEntities db = new EventoDeportivoCibertecEntities();
 
-        // GET: api/tb_usuario
-        public IQueryable<tb_usuario> Gettb_usuario()
+        // GET: api/usuarios
+        public IQueryable<usuario> Getusuarios()
         {
-            return db.tb_usuario;
+            return db.usuarios;
         }
 
-
-        // GET: api/tb_usuario/5
-        [ResponseType(typeof(tb_usuario))]
-        public async Task<IHttpActionResult> Gettb_usuario(int id)
+        // GET: api/usuarios/5
+        [ResponseType(typeof(usuario))]
+        public async Task<IHttpActionResult> Getusuario(int id)
         {
-            tb_usuario tb_usuario = await db.tb_usuario.FindAsync(id);
-            if (tb_usuario == null)
+            usuario usuario = await db.usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return Ok(tb_usuario);
+            return Ok(usuario);
         }
 
-        // PUT: api/tb_usuario/5
+        // PUT: api/usuarios/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Puttb_usuario(int id, tb_usuario tb_usuario)
+        public async Task<IHttpActionResult> Putusuario(int id, usuario usuario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != tb_usuario.idusuario)
+            if (id != usuario.idusuario)
             {
                 return BadRequest();
             }
 
-            db.Entry(tb_usuario).State = EntityState.Modified;
+            db.Entry(usuario).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +58,7 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tb_usuarioExists(id))
+                if (!usuarioExists(id))
                 {
                     return NotFound();
                 }
@@ -72,16 +71,16 @@ namespace EDCibertecAppWebApiRest.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/tb_usuario
-        [ResponseType(typeof(tb_usuario))]
-        public async Task<IHttpActionResult> Posttb_usuario(tb_usuario tb_usuario)
+        // POST: api/usuarios
+        [ResponseType(typeof(usuario))]
+        public async Task<IHttpActionResult> Postusuario(usuario usuario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.tb_usuario.Add(tb_usuario);
+            db.usuarios.Add(usuario);
 
             try
             {
@@ -89,7 +88,7 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
             catch (DbUpdateException)
             {
-                if (tb_usuarioExists(tb_usuario.idusuario))
+                if (usuarioExists(usuario.idusuario))
                 {
                     return Conflict();
                 }
@@ -99,23 +98,23 @@ namespace EDCibertecAppWebApiRest.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = tb_usuario.idusuario }, tb_usuario);
+            return CreatedAtRoute("DefaultApi", new { id = usuario.idusuario }, usuario);
         }
 
-        // DELETE: api/tb_usuario/5
-        [ResponseType(typeof(tb_usuario))]
-        public async Task<IHttpActionResult> Deletetb_usuario(int id)
+        // DELETE: api/usuarios/5
+        [ResponseType(typeof(usuario))]
+        public async Task<IHttpActionResult> Deleteusuario(int id)
         {
-            tb_usuario tb_usuario = await db.tb_usuario.FindAsync(id);
-            if (tb_usuario == null)
+            usuario usuario = await db.usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            db.tb_usuario.Remove(tb_usuario);
+            db.usuarios.Remove(usuario);
             await db.SaveChangesAsync();
 
-            return Ok(tb_usuario);
+            return Ok(usuario);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,9 +126,9 @@ namespace EDCibertecAppWebApiRest.Controllers
             base.Dispose(disposing);
         }
 
-        private bool tb_usuarioExists(int id)
+        private bool usuarioExists(int id)
         {
-            return db.tb_usuario.Count(e => e.idusuario == id) > 0;
+            return db.usuarios.Count(e => e.idusuario == id) > 0;
         }
     }
 }

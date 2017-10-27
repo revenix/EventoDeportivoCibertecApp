@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EventoDeportivoCibertecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tb_enlace">
+        <EntityType Name="enlace">
           <Key>
             <PropertyRef Name="idenlace" />
           </Key>
@@ -13,58 +13,58 @@
           <Property Name="descripcion" Type="varchar" MaxLength="45" />
           <Property Name="ruta" Type="varchar" MaxLength="45" />
         </EntityType>
-        <EntityType Name="tb_rol">
+        <EntityType Name="rol">
           <Key>
             <PropertyRef Name="idrol" />
           </Key>
           <Property Name="idrol" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="45" />
-          <Property Name="idenlace" Type="int" />
+          <Property Name="idenlace" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="tb_usuario">
+        <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="idusuario" />
           </Key>
           <Property Name="idusuario" Type="int" Nullable="false" />
-          <Property Name="usuario" Type="varchar" MaxLength="45" />
+          <Property Name="login" Type="varchar" MaxLength="45" />
           <Property Name="contraseña" Type="varchar" MaxLength="45" />
-          <Property Name="idrol" Type="int" />
+          <Property Name="idrol" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tb_rol__idenlace__4D94879B">
-          <End Role="tb_enlace" Type="Self.tb_enlace" Multiplicity="0..1" />
-          <End Role="tb_rol" Type="Self.tb_rol" Multiplicity="*" />
+        <Association Name="FK__rol__idenlace__6FE99F9F">
+          <End Role="enlace" Type="Self.enlace" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_enlace">
+            <Principal Role="enlace">
               <PropertyRef Name="idenlace" />
             </Principal>
-            <Dependent Role="tb_rol">
+            <Dependent Role="rol">
               <PropertyRef Name="idenlace" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tb_usuari__idrol__52593CB8">
-          <End Role="tb_rol" Type="Self.tb_rol" Multiplicity="0..1" />
-          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+        <Association Name="FK__usuario__idrol__74AE54BC">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_rol">
+            <Principal Role="rol">
               <PropertyRef Name="idrol" />
             </Principal>
-            <Dependent Role="tb_usuario">
+            <Dependent Role="usuario">
               <PropertyRef Name="idrol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EventoDeportivoCibertecModelStoreContainer">
-          <EntitySet Name="tb_enlace" EntityType="Self.tb_enlace" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_rol" EntityType="Self.tb_rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tb_rol__idenlace__4D94879B" Association="Self.FK__tb_rol__idenlace__4D94879B">
-            <End Role="tb_enlace" EntitySet="tb_enlace" />
-            <End Role="tb_rol" EntitySet="tb_rol" />
+          <EntitySet Name="enlace" EntityType="Self.enlace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__rol__idenlace__6FE99F9F" Association="Self.FK__rol__idenlace__6FE99F9F">
+            <End Role="enlace" EntitySet="enlace" />
+            <End Role="rol" EntitySet="rol" />
           </AssociationSet>
-          <AssociationSet Name="FK__tb_usuari__idrol__52593CB8" Association="Self.FK__tb_usuari__idrol__52593CB8">
-            <End Role="tb_rol" EntitySet="tb_rol" />
-            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          <AssociationSet Name="FK__usuario__idrol__74AE54BC" Association="Self.FK__usuario__idrol__74AE54BC">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -72,70 +72,70 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventoDeportivoCibertecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tb_enlace">
+        <EntityType Name="enlace">
           <Key>
             <PropertyRef Name="idenlace" />
           </Key>
           <Property Name="idenlace" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ruta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_rol" Relationship="Self.FK__tb_rol__idenlace__4D94879B" FromRole="tb_enlace" ToRole="tb_rol" />
+          <NavigationProperty Name="rols" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="enlace" ToRole="rol" />
         </EntityType>
-        <EntityType Name="tb_rol">
+        <EntityType Name="rol">
           <Key>
             <PropertyRef Name="idrol" />
           </Key>
           <Property Name="idrol" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="idenlace" Type="Int32" />
-          <NavigationProperty Name="tb_enlace" Relationship="Self.FK__tb_rol__idenlace__4D94879B" FromRole="tb_rol" ToRole="tb_enlace" />
-          <NavigationProperty Name="tb_usuario" Relationship="Self.FK__tb_usuari__idrol__52593CB8" FromRole="tb_rol" ToRole="tb_usuario" />
+          <Property Name="idenlace" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="enlace" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="rol" ToRole="enlace" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="rol" ToRole="usuario" />
         </EntityType>
-        <EntityType Name="tb_usuario">
+        <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="idusuario" />
           </Key>
           <Property Name="idusuario" Type="Int32" Nullable="false" />
-          <Property Name="usuario" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="contraseña" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="idrol" Type="Int32" />
-          <NavigationProperty Name="tb_rol" Relationship="Self.FK__tb_usuari__idrol__52593CB8" FromRole="tb_usuario" ToRole="tb_rol" />
+          <Property Name="idrol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rol" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="usuario" ToRole="rol" />
         </EntityType>
-        <Association Name="FK__tb_rol__idenlace__4D94879B">
-          <End Role="tb_enlace" Type="Self.tb_enlace" Multiplicity="0..1" />
-          <End Role="tb_rol" Type="Self.tb_rol" Multiplicity="*" />
+        <Association Name="FK__rol__idenlace__6FE99F9F">
+          <End Role="enlace" Type="Self.enlace" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_enlace">
+            <Principal Role="enlace">
               <PropertyRef Name="idenlace" />
             </Principal>
-            <Dependent Role="tb_rol">
+            <Dependent Role="rol">
               <PropertyRef Name="idenlace" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tb_usuari__idrol__52593CB8">
-          <End Role="tb_rol" Type="Self.tb_rol" Multiplicity="0..1" />
-          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+        <Association Name="FK__usuario__idrol__74AE54BC">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_rol">
+            <Principal Role="rol">
               <PropertyRef Name="idrol" />
             </Principal>
-            <Dependent Role="tb_usuario">
+            <Dependent Role="usuario">
               <PropertyRef Name="idrol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EventoDeportivoCibertecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_enlace" EntityType="Self.tb_enlace" />
-          <EntitySet Name="tb_rol" EntityType="Self.tb_rol" />
-          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
-          <AssociationSet Name="FK__tb_rol__idenlace__4D94879B" Association="Self.FK__tb_rol__idenlace__4D94879B">
-            <End Role="tb_enlace" EntitySet="tb_enlace" />
-            <End Role="tb_rol" EntitySet="tb_rol" />
+          <EntitySet Name="enlaces" EntityType="Self.enlace" />
+          <EntitySet Name="rols" EntityType="Self.rol" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="FK__rol__idenlace__6FE99F9F" Association="Self.FK__rol__idenlace__6FE99F9F">
+            <End Role="enlace" EntitySet="enlaces" />
+            <End Role="rol" EntitySet="rols" />
           </AssociationSet>
-          <AssociationSet Name="FK__tb_usuari__idrol__52593CB8" Association="Self.FK__tb_usuari__idrol__52593CB8">
-            <End Role="tb_rol" EntitySet="tb_rol" />
-            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          <AssociationSet Name="FK__usuario__idrol__74AE54BC" Association="Self.FK__usuario__idrol__74AE54BC">
+            <End Role="rol" EntitySet="rols" />
+            <End Role="usuario" EntitySet="usuarios" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -144,29 +144,29 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EventoDeportivoCibertecModelStoreContainer" CdmEntityContainer="EventoDeportivoCibertecEntities">
-          <EntitySetMapping Name="tb_enlace">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_enlace">
-              <MappingFragment StoreEntitySet="tb_enlace">
+          <EntitySetMapping Name="enlaces">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.enlace">
+              <MappingFragment StoreEntitySet="enlace">
                 <ScalarProperty Name="idenlace" ColumnName="idenlace" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="ruta" ColumnName="ruta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_rol">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_rol">
-              <MappingFragment StoreEntitySet="tb_rol">
+          <EntitySetMapping Name="rols">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.rol">
+              <MappingFragment StoreEntitySet="rol">
                 <ScalarProperty Name="idrol" ColumnName="idrol" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="idenlace" ColumnName="idenlace" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_usuario">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_usuario">
-              <MappingFragment StoreEntitySet="tb_usuario">
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
                 <ScalarProperty Name="idusuario" ColumnName="idusuario" />
-                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="contraseña" ColumnName="contraseña" />
                 <ScalarProperty Name="idrol" ColumnName="idrol" />
               </MappingFragment>

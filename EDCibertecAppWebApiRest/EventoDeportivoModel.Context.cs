@@ -25,8 +25,8 @@ namespace EDCibertecAppWebApiRest
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_enlace> tb_enlace { get; set; }
-        public virtual DbSet<tb_rol> tb_rol { get; set; }
-        public virtual DbSet<tb_usuario> tb_usuario { get; set; }
+        public virtual DbSet<enlace> enlaces { get; set; }
+        public virtual DbSet<rol> rols { get; set; }
+        public virtual DbSet<usuario> usuarios { get; set; }
     }
 }
