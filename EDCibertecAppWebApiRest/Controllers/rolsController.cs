@@ -13,45 +13,44 @@ using EDCibertecAppWebApiRest;
 
 namespace EDCibertecAppWebApiRest.Controllers
 {
-
-    public class usuariosController : ApiController
+    public class rolsController : ApiController
     {
         private EventoDeportivoCibertecEntities db = new EventoDeportivoCibertecEntities();
 
-        // GET: api/usuarios
-        public IQueryable<usuario> Getusuarios()
+        // GET: api/rols
+        public IQueryable<rol> Getrols()
         {
-            return db.usuarios;
+            return db.rols;
         }
 
-        // GET: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public async Task<IHttpActionResult> Getusuario(int id)
+        // GET: api/rols/5
+        [ResponseType(typeof(rol))]
+        public async Task<IHttpActionResult> Getrol(int id)
         {
-            usuario usuario = await db.usuarios.FindAsync(id);
-            if (usuario == null)
+            rol rol = await db.rols.FindAsync(id);
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(rol);
         }
 
-        // PUT: api/usuarios/5
+        // PUT: api/rols/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putusuario(int id, usuario usuario)
+        public async Task<IHttpActionResult> Putrol(int id, rol rol)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.idusuario)
+            if (id != rol.idrol)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(rol).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +58,7 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!usuarioExists(id))
+                if (!rolExists(id))
                 {
                     return NotFound();
                 }
@@ -72,16 +71,16 @@ namespace EDCibertecAppWebApiRest.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/usuarios
-        [ResponseType(typeof(usuario))]
-        public async Task<IHttpActionResult> Postusuario(usuario usuario)
+        // POST: api/rols
+        [ResponseType(typeof(rol))]
+        public async Task<IHttpActionResult> Postrol(rol rol)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.usuarios.Add(usuario);
+            db.rols.Add(rol);
 
             try
             {
@@ -89,7 +88,7 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
             catch (DbUpdateException)
             {
-                if (usuarioExists(usuario.idusuario))
+                if (rolExists(rol.idrol))
                 {
                     return Conflict();
                 }
@@ -99,23 +98,23 @@ namespace EDCibertecAppWebApiRest.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.idusuario }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = rol.idrol }, rol);
         }
 
-        // DELETE: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public async Task<IHttpActionResult> Deleteusuario(int id)
+        // DELETE: api/rols/5
+        [ResponseType(typeof(rol))]
+        public async Task<IHttpActionResult> Deleterol(int id)
         {
-            usuario usuario = await db.usuarios.FindAsync(id);
-            if (usuario == null)
+            rol rol = await db.rols.FindAsync(id);
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            db.usuarios.Remove(usuario);
+            db.rols.Remove(rol);
             await db.SaveChangesAsync();
 
-            return Ok(usuario);
+            return Ok(rol);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,9 +126,9 @@ namespace EDCibertecAppWebApiRest.Controllers
             base.Dispose(disposing);
         }
 
-        private bool usuarioExists(int id)
+        private bool rolExists(int id)
         {
-            return db.usuarios.Count(e => e.idusuario == id) > 0;
+            return db.rols.Count(e => e.idrol == id) > 0;
         }
     }
 }

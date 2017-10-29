@@ -28,5 +28,7 @@ namespace EDCibertecAppWebApiRest
         public virtual DbSet<enlace> enlaces { get; set; }
         public virtual DbSet<rol> rols { get; set; }
         public virtual DbSet<usuario> usuarios { get; set; }
+
+        public System.Data.Entity.DbSet<EDCibertecAppWebApiRest.Models.Usuario> Usuarios { get; set; }
     }
 }
