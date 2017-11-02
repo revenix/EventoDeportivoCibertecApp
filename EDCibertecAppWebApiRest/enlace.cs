@@ -17,7 +17,7 @@ namespace EDCibertecAppWebApiRest
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public enlace()
         {
-            this.rols = new HashSet<rol>();
+            this.rol = new HashSet<rol>();
         }
     
         public int idenlace { get; set; }
@@ -25,6 +25,6 @@ namespace EDCibertecAppWebApiRest
         public string ruta { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rol> rols { get; set; }
+        public virtual ICollection<rol> rol { get; set; }
     }
 }

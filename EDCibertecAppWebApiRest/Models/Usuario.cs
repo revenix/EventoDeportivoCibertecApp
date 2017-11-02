@@ -8,10 +8,9 @@ namespace EDCibertecAppWebApiRest.Models
 {
     public class Usuario
     {
-        [Key]
+       
         public int idusuario { get; set; }
-        [Required]
-        public string usuario { get; set; }
+        public string login { get; set; }
         public string contraseña { get; set; }
         public int idrol { get; set; }
 

@@ -5,7 +5,7 @@ using Android.OS;
 using EventoDeportivoCibertecApp.portable;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System;
 
 namespace EventoDeportivoCibertecApp.droid
 {
@@ -59,13 +59,15 @@ namespace EventoDeportivoCibertecApp.droid
                 var dato = await controller.GetUsuarios();
 
 
-                ArrayAdapter array = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1  , dato.Select(m => m.login).ToArray());
+                ArrayAdapter array = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, dato.Select(m => m.login).ToArray());
 
                 listUsuarios.Adapter = array;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                Toast.MakeText(this,"error al cargar los usuarios", ToastLength.Long).Show();
+                Toast.MakeText(this, e.ToString() , ToastLength.Long).Show();
+              //  Console.WriteLine(e.ToString());
+               // Console.WriteLine("listo");
             }
             
         }

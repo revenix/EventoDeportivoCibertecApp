@@ -15,7 +15,7 @@ namespace EventoDeportivoCibertecApp.portable
         List<Usuario> listUsuarios = new List<Usuario>();
 
         //En ésta url agregar el link tu servicio web
-        const string url = "http://eventodeportivocibertec.azurewebsites.net/api/usuarios";
+        const string url = "http://eventodeportivocibertec.azurewebsites.net/api/Usuario";
 
         public async Task<List<Usuario>> GetUsuarios()
         {
@@ -56,6 +56,22 @@ namespace EventoDeportivoCibertecApp.portable
 
 
         }
+        public async Task<string> RegistrarUsuario(int id, string login , string contraseña, int idrol)
+        {
+
+            var url = String.Format("http://eventodeportivocibertec.azurewebsites.net/api/Usuario?id={0}&login={1}&contraseña={2}&idrol={3}",id, login ,contraseña,idrol );
+            var http = new HttpClient();
+            var response = await http.PutAsync(url, null);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject(content).ToString();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
 
         public async Task<Usuario> DeleteUsuario(int id)
         {
@@ -80,7 +96,7 @@ namespace EventoDeportivoCibertecApp.portable
 
 
         }
-
+        /*
         public async Task<String> PostUsuario(Usuario usu)
         {
 
@@ -95,7 +111,7 @@ namespace EventoDeportivoCibertecApp.portable
             return msg;
 
         }
-
+        */
 
 
 

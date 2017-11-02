@@ -47,15 +47,13 @@ namespace EventoDeportivoCibertecApp.droid
 
             if (!string.IsNullOrEmpty(txtId.Text) || !string.IsNullOrEmpty(txtLogin.Text) || !string.IsNullOrEmpty(txtContraseña.Text) || !string.IsNullOrEmpty(txtidrol.Text))
             {
-                Usuario usuario = new Usuario()
-                {
-                    idusuario =int.Parse(txtId.Text),
-                    login = txtLogin.Text,
-                    contraseña = txtContraseña.Text,
-                    idrol = int.Parse(txtidrol.Text)
-                };
 
-                respuesta = await controller.PostUsuario(usuario);
+              var  idusuario = int.Parse(txtId.Text);
+              var  login = txtLogin.Text;
+              var  contraseña = txtContraseña.Text;
+               var idrol = int.Parse(txtidrol.Text);
+               
+                respuesta = await controller.RegistrarUsuario(idusuario , login, contraseña, idrol);
 
                 //Llamamos a nuestro activity Principal (La vieja confiable)
                 StartActivity(typeof(MainActivity));

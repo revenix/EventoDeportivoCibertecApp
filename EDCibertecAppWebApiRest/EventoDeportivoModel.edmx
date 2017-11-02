@@ -54,6 +54,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_BuscaUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_EliminaUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_listaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_RegistrarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="login" Type="varchar" Mode="In" />
+          <Parameter Name="contraseña" Type="varchar" Mode="In" />
+          <Parameter Name="idrol" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="EventoDeportivoCibertecModelStoreContainer">
           <EntitySet Name="enlace" EntityType="Self.enlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
@@ -79,7 +92,7 @@
           <Property Name="idenlace" Type="Int32" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="ruta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="rols" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="enlace" ToRole="rol" />
+          <NavigationProperty Name="rol" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="enlace" ToRole="rol" />
         </EntityType>
         <EntityType Name="rol">
           <Key>
@@ -89,7 +102,7 @@
           <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="idenlace" Type="Int32" Nullable="false" />
           <NavigationProperty Name="enlace" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="rol" ToRole="enlace" />
-          <NavigationProperty Name="usuarios" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="rol" ToRole="usuario" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="rol" ToRole="usuario" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -126,25 +139,50 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EventoDeportivoCibertecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="enlaces" EntityType="Self.enlace" />
-          <EntitySet Name="rols" EntityType="Self.rol" />
-          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <EntitySet Name="enlace" EntityType="Self.enlace" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
           <AssociationSet Name="FK__rol__idenlace__6FE99F9F" Association="Self.FK__rol__idenlace__6FE99F9F">
-            <End Role="enlace" EntitySet="enlaces" />
-            <End Role="rol" EntitySet="rols" />
+            <End Role="enlace" EntitySet="enlace" />
+            <End Role="rol" EntitySet="rol" />
           </AssociationSet>
           <AssociationSet Name="FK__usuario__idrol__74AE54BC" Association="Self.FK__usuario__idrol__74AE54BC">
-            <End Role="rol" EntitySet="rols" />
-            <End Role="usuario" EntitySet="usuarios" />
+            <End Role="rol" EntitySet="rol" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
+          <FunctionImport Name="sp_BuscaUsuario" ReturnType="Collection(EventoDeportivoCibertecModel.sp_BuscaUsuario_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_EliminaUsuario">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_listaUsuarios" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaUsuarios_Result)" />
+          <FunctionImport Name="sp_RegistrarUsuarios">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="contraseña" Mode="In" Type="String" />
+            <Parameter Name="idrol" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_BuscaUsuario_Result">
+          <Property Type="Int32" Name="idusuario" Nullable="false" />
+          <Property Type="String" Name="login" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="contraseña" Nullable="true" MaxLength="45" />
+          <Property Type="Int32" Name="idrol" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_listaUsuarios_Result">
+          <Property Type="Int32" Name="idusuario" Nullable="false" />
+          <Property Type="String" Name="login" Nullable="true" MaxLength="45" />
+          <Property Type="String" Name="contraseña" Nullable="true" MaxLength="45" />
+          <Property Type="Int32" Name="idrol" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EventoDeportivoCibertecModelStoreContainer" CdmEntityContainer="EventoDeportivoCibertecEntities">
-          <EntitySetMapping Name="enlaces">
+          <EntitySetMapping Name="enlace">
             <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.enlace">
               <MappingFragment StoreEntitySet="enlace">
                 <ScalarProperty Name="idenlace" ColumnName="idenlace" />
@@ -153,7 +191,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="rols">
+          <EntitySetMapping Name="rol">
             <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.rol">
               <MappingFragment StoreEntitySet="rol">
                 <ScalarProperty Name="idrol" ColumnName="idrol" />
@@ -162,7 +200,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuarios">
+          <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
                 <ScalarProperty Name="idusuario" ColumnName="idusuario" />
@@ -172,6 +210,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_BuscaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_BuscaUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_BuscaUsuario_Result">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_EliminaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_EliminaUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_listaUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_listaUsuarios_Result">
+                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="idrol" ColumnName="idrol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_RegistrarUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_RegistrarUsuarios" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -186,7 +246,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
