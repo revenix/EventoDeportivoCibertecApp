@@ -22,20 +22,20 @@ namespace EDCibertecAppWebApiRest.Controllers
                                 login = s.login,
                                 contraseña = s.contraseña,
                                 idrol = s.idrol,
-                              
+
                             }).ToList();
 
             return consulta;
         }
 
         [HttpPost]
-        
+
         public string PostBuscaUsuario(int id)
         {
             try
             {
                 var query = db.sp_BuscaUsuario(id);
-              
+
                 return query.ToString();
 
             }
@@ -46,7 +46,7 @@ namespace EDCibertecAppWebApiRest.Controllers
         }
 
         [HttpPost]
-      
+
         public string PostRegistroUsuario(int id, string login, string contraseña, int idrol)
         {
             try
@@ -60,9 +60,8 @@ namespace EDCibertecAppWebApiRest.Controllers
                 return BadRequest().ToString();
             }
         }
-        [HttpPost]
 
-     
+       // [HttpPost]
         /*  [HttpPut]
           public IHttpActionResult UpdateCliente(int id, string dni, string nom, string ape, int t, string Ap, int estado)
           {
@@ -77,6 +76,6 @@ namespace EDCibertecAppWebApiRest.Controllers
               }
           }
           */
-
+    
     }
 }

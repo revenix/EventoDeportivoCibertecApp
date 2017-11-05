@@ -9,7 +9,7 @@ using System;
 
 namespace EventoDeportivoCibertecApp.droid
 {
-    [Activity(Label = "EventoDeportivoCibertecApp.droid", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "EventoDeportivoCibertecApp.droid")]
     public class MainActivity : Activity
     {
 

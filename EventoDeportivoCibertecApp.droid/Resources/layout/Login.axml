@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="50dp"
+    android:paddingTop="50dp"
+    android:paddingRight="50dp"
+    android:background="@drawable/fondo1">
+    <ImageView
+        android:src="@drawable/cibertec"
+        android:layout_height="80dp"
+        android:layout_width="110dp"
+        android:layout_gravity="center" />
+    <EditText
+        android:id="@+id/txtlogin"
+        android:layout_gravity="center"
+        android:hint="Username"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/login" />
+    <EditText
+        android:id="@+id/txtpassword"
+        android:hint="Password"
+        android:layout_gravity="center"
+        android:inputType="textPassword"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/password" />
+    <Button
+        android:id="@+id/btnIngresar"
+        android:text="Ingresar"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+  <!--android:background="@drawable/ButtonLogin"-->
+  
+  
+</LinearLayout>
