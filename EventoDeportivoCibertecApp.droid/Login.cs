@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EventoDeportivoCibertecApp.portable;
+using System.Threading;
 
 namespace EventoDeportivoCibertecApp.droid
 {
@@ -37,7 +38,10 @@ namespace EventoDeportivoCibertecApp.droid
 
         private async void BtnIngresar_Click(object sender, EventArgs e)
         {
-             string login = txtlogin.Text;
+            
+
+
+                string login = txtlogin.Text;
              string pasword = txtpassword.Text;
 
             if (!string.IsNullOrEmpty(login) || !string.IsNullOrEmpty(pasword))

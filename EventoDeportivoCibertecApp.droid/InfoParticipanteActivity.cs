@@ -34,7 +34,7 @@ namespace EventoDeportivoCibertecApp.droid
             rating = FindViewById<RatingBar>(Resource.Id.txtratingbar);
             equipo = FindViewById<TextView>(Resource.Id.txtequipo);
 
-            int id = 0 ;
+           // int id = 0 ;
             string idparticipante = Intent.GetStringExtra("idparticipante");
                  Toast.MakeText(this, idparticipante, ToastLength.Long).Show();
 

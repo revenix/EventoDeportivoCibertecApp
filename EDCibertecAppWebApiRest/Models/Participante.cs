@@ -16,4 +16,15 @@ namespace EDCibertecAppWebApiRest.Models
         
     }
 
+    public class Participantelista
+    {
+        public string nombre { get; set; }
+        public string puesto { get; set; }
+        public int id_participante { get; set; }
+        public string nombres { get; set; }
+        public string apellidos { get; set; }
+        public string valoracion { get; set; }
+
+    }
+
 }

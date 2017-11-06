@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="100dp">
     <TextView
-        android:id="@+id/txtNombreEvento"
+        android:id="@+id/txtmodadeporte"
         android:text="evento"
         android:textSize="30dp"
         android:paddingTop="20dp"
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/txtSedeEvento"
+        android:id="@+id/txtmodacategoria"
         android:text="sede"
         android:textSize="23dp"
         android:paddingTop="5dp"
@@ -21,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
   <TextView
-          android:id="@+id/txtidEvento"
+          android:id="@+id/txtidmodalidad"
           android:textSize="10dp"
           android:layout_gravity="center"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content" />
-
+  
 </LinearLayout>

@@ -13,27 +13,27 @@ using EventoDeportivoCibertecApp.portable;
 
 namespace EventoDeportivoCibertecApp.droid
 {
-    public class EventosAdapter : BaseAdapter<Evento>
+    public class ModalidadesAdapter : BaseAdapter<Modalidad>
         
     {
        
-        List<Evento> _eventolist;
+        List<Modalidad> _modalidadlist;
         Activity _context;
         //Services controller = new Services();
 
-        public EventosAdapter(Activity context, List<Evento> list)
+        public ModalidadesAdapter(Activity context, List<Modalidad> list)
             :base()
         {
-            this._eventolist = list;
+            this._modalidadlist = list;
             this._context = context;
         }
 
-        public override Evento this[int position]
+        public override Modalidad this[int position]
         {
-            get { return _eventolist[position]; }
+            get { return _modalidadlist[position]; }
         }
         public override int Count {
-            get { return _eventolist.Count; }
+            get { return _modalidadlist.Count; }
         }
         
         public override Java.Lang.Object GetItem(int position)
@@ -49,14 +49,14 @@ namespace EventoDeportivoCibertecApp.droid
         {
             View view = convertView;
             if (view == null)
-                view = _context.LayoutInflater.Inflate(Resource.Layout.EventosListItem, parent, false);
+                view = _context.LayoutInflater.Inflate(Resource.Layout.ModalidadesListItem, parent, false);
 
             var item = this[position];
 
             // var item = _eventolist[position];
-            view.FindViewById<TextView>(Resource.Id.txtidEvento).Text = item.idevento.ToString();
-            view.FindViewById<TextView>(Resource.Id.txtSedeEvento).Text = item.lugar;
-            view.FindViewById<TextView>(Resource.Id.txtNombreEvento).Text = item.nombre_evento;
+            view.FindViewById<TextView>(Resource.Id.txtidmodalidad).Text = item.id_modalidad.ToString();
+            view.FindViewById<TextView>(Resource.Id.txtmodadeporte).Text = item.deporte;
+            view.FindViewById<TextView>(Resource.Id.txtmodacategoria).Text = item.categoria;
 
             return view;
 

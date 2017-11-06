@@ -40,17 +40,50 @@ namespace EventoDeportivoCibertecApp.portable
             return participante;
 
         }
-        public async Task<Evento> ListEventos()
+        public async Task<List<Evento>> ListEventos()
         {
             var par = $"listaeventos";
 
             var uri = url + par;
             var respuestaService = await http.GetAsync(uri);
             var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
-            var evento = JsonConvert.DeserializeObject<Evento>(contenido);
+            var evento = JsonConvert.DeserializeObject<List<Evento>>(contenido);
             return evento;
 
         }
+
+        public async Task<List< Modalidad>> ListaModalidad (int id)
+        {
+            var link = $"listamod?id={id}";
+            var uri = url + link;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var lista = JsonConvert.DeserializeObject<List< Modalidad>>(contenido);
+            return lista;
+
+        }
+        public async Task<List<Equipo>> ListaEquipos(int id)
+        {
+            var link = $"listaequipos?id={id}";
+            var uri = url + link;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var lista = JsonConvert.DeserializeObject<List<Equipo>>(contenido);
+            return lista;
+
+        }
+
+        public async Task<List<Participantelista>> ListaParticipantes(int id)
+        {
+            var link = $"listaparti?id={id}";
+            var uri = url + link;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var lista = JsonConvert.DeserializeObject<List<Participantelista>>(contenido);
+            return lista;
+
+        }
+
         /*
 
                 public async Task<List<Usuario>> GetUsuarios()

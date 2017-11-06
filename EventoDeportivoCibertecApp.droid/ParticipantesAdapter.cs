@@ -13,27 +13,27 @@ using EventoDeportivoCibertecApp.portable;
 
 namespace EventoDeportivoCibertecApp.droid
 {
-    public class EventosAdapter : BaseAdapter<Evento>
+    public class ParticipantesAdapter : BaseAdapter<Participantelista>
         
     {
        
-        List<Evento> _eventolist;
+        List<Participantelista> _participantelist;
         Activity _context;
         //Services controller = new Services();
 
-        public EventosAdapter(Activity context, List<Evento> list)
+        public ParticipantesAdapter(Activity context, List<Participantelista> list)
             :base()
         {
-            this._eventolist = list;
+            this._participantelist = list;
             this._context = context;
         }
 
-        public override Evento this[int position]
+        public override Participantelista this[int position]
         {
-            get { return _eventolist[position]; }
+            get { return _participantelist[position]; }
         }
         public override int Count {
-            get { return _eventolist.Count; }
+            get { return _participantelist.Count; }
         }
         
         public override Java.Lang.Object GetItem(int position)
@@ -49,14 +49,15 @@ namespace EventoDeportivoCibertecApp.droid
         {
             View view = convertView;
             if (view == null)
-                view = _context.LayoutInflater.Inflate(Resource.Layout.EventosListItem, parent, false);
+                view = _context.LayoutInflater.Inflate(Resource.Layout.ParticipantesListItem, parent, false);
 
             var item = this[position];
 
             // var item = _eventolist[position];
-            view.FindViewById<TextView>(Resource.Id.txtidEvento).Text = item.idevento.ToString();
-            view.FindViewById<TextView>(Resource.Id.txtSedeEvento).Text = item.lugar;
-            view.FindViewById<TextView>(Resource.Id.txtNombreEvento).Text = item.nombre_evento;
+            view.FindViewById<TextView>(Resource.Id.txtidparticipante).Text = item.id_participante.ToString();
+            view.FindViewById<TextView>(Resource.Id.txtnombreParticipante).Text = item.nombres +" " +item.apellidos;
+            view.FindViewById<TextView>(Resource.Id.txtpuesto).Text = item.puesto;
+            view.FindViewById<RatingBar>(Resource.Id.txtratingbarParticipante).Rating =int.Parse(item.valoracion);
 
             return view;
 
