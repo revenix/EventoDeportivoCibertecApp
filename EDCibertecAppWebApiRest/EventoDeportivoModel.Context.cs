@@ -44,22 +44,14 @@ namespace EDCibertecAppWebApiRest
         public virtual DbSet<tb_subMenu> tb_subMenu { get; set; }
         public virtual DbSet<tb_usuario> tb_usuario { get; set; }
     
-        public virtual int sp_BuscaUsuario(Nullable<int> id)
+        public virtual ObjectResult<sp_ListarDisciplinas_Result> sp_ListarDisciplinas()
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_BuscaUsuario", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListarDisciplinas_Result>("sp_ListarDisciplinas");
         }
     
-        public virtual int sp_EliminaUsuario(Nullable<int> id)
+        public virtual ObjectResult<sp_ListarEventos_Result> sp_ListarEventos()
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EliminaUsuario", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListarEventos_Result>("sp_ListarEventos");
         }
     
         public virtual int sp_listaUsuarios()
@@ -87,27 +79,6 @@ namespace EDCibertecAppWebApiRest
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Participanteinfo_Result>("sp_Participanteinfo", idParameter);
-        }
-    
-        public virtual int sp_RegistrarUsuarios(Nullable<int> id, string login, string contraseña, Nullable<int> idrol)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var loginParameter = login != null ?
-                new ObjectParameter("login", login) :
-                new ObjectParameter("login", typeof(string));
-    
-            var contraseñaParameter = contraseña != null ?
-                new ObjectParameter("contraseña", contraseña) :
-                new ObjectParameter("contraseña", typeof(string));
-    
-            var idrolParameter = idrol.HasValue ?
-                new ObjectParameter("idrol", idrol) :
-                new ObjectParameter("idrol", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistrarUsuarios", idParameter, loginParameter, contraseñaParameter, idrolParameter);
         }
     }
 }

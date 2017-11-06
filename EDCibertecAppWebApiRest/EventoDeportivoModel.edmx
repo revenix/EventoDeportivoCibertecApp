@@ -361,12 +361,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_BuscaUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_EliminaUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
+        <Function Name="sp_ListarDisciplinas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_ListarEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_listaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="login" Type="char" Mode="In" />
@@ -374,12 +370,6 @@
         </Function>
         <Function Name="sp_Participanteinfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_RegistrarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="login" Type="varchar" Mode="In" />
-          <Parameter Name="contraseña" Type="varchar" Mode="In" />
-          <Parameter Name="idrol" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="EventoDeportivoCibertecModelStoreContainer">
           <EntitySet Name="sede" EntityType="Self.sede" Schema="dbo" store:Type="Tables" />
@@ -904,12 +894,8 @@
             <End Role="tb_Perfil" EntitySet="tb_Perfil" />
             <End Role="tb_subMenu" EntitySet="tb_subMenu" />
           </AssociationSet>
-          <FunctionImport Name="sp_BuscaUsuario">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_EliminaUsuario">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <FunctionImport Name="sp_ListarDisciplinas" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarDisciplinas_Result)" />
+          <FunctionImport Name="sp_ListarEventos" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarEventos_Result)" />
           <FunctionImport Name="sp_listaUsuarios" />
           <FunctionImport Name="sp_login" ReturnType="Collection(EventoDeportivoCibertecModel.sp_login_Result)">
             <Parameter Name="login" Mode="In" Type="String" />
@@ -918,13 +904,17 @@
           <FunctionImport Name="sp_Participanteinfo" ReturnType="Collection(EventoDeportivoCibertecModel.sp_Participanteinfo_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_RegistrarUsuarios">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="login" Mode="In" Type="String" />
-            <Parameter Name="contraseña" Mode="In" Type="String" />
-            <Parameter Name="idrol" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_ListarDisciplinas_Result">
+          <Property Type="Int32" Name="id_disciplina" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="sp_ListarEventos_Result">
+          <Property Type="Int32" Name="idevento" Nullable="false" />
+          <Property Type="String" Name="nombre_evento" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="lugar" Nullable="false" MaxLength="45" />
+          <Property Type="DateTime" Name="fecha_inicio" Nullable="false" />
+        </ComplexType>
         <ComplexType Name="sp_login_Result">
           <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
           <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
@@ -1121,8 +1111,24 @@
               <ScalarProperty Name="id_subMenu" ColumnName="id_subMenu" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_BuscaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_BuscaUsuario" />
-          <FunctionImportMapping FunctionImportName="sp_EliminaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_EliminaUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_ListarDisciplinas" FunctionName="EventoDeportivoCibertecModel.Store.sp_ListarDisciplinas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_ListarDisciplinas_Result">
+                <ScalarProperty Name="id_disciplina" ColumnName="id_disciplina" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ListarEventos" FunctionName="EventoDeportivoCibertecModel.Store.sp_ListarEventos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_ListarEventos_Result">
+                <ScalarProperty Name="idevento" ColumnName="idevento" />
+                <ScalarProperty Name="nombre_evento" ColumnName="nombre_evento" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_listaUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaUsuarios" />
           <FunctionImportMapping FunctionImportName="sp_login" FunctionName="EventoDeportivoCibertecModel.Store.sp_login">
             <ResultMapping>
@@ -1146,7 +1152,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_RegistrarUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_RegistrarUsuarios" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

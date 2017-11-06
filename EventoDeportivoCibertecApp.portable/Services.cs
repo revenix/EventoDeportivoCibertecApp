@@ -40,6 +40,17 @@ namespace EventoDeportivoCibertecApp.portable
             return participante;
 
         }
+        public async Task<Evento> ListEventos()
+        {
+            var par = $"listaeventos";
+
+            var uri = url + par;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var evento = JsonConvert.DeserializeObject<Evento>(contenido);
+            return evento;
+
+        }
         /*
 
                 public async Task<List<Usuario>> GetUsuarios()

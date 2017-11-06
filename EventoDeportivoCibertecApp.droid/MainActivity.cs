@@ -8,54 +8,50 @@ using System.Threading.Tasks;
 using System;
 using ZXing.Mobile;
 using Android.Content;
+using System.Collections.Generic;
 
 namespace EventoDeportivoCibertecApp.droid
 {
     [Activity(Label = "EventoDeportivoCibertecApp.droid")]
     public class MainActivity : Activity
     {
-
-        EditText txtID;
-        ListView listUsuarios;
-        Button btnBuscar, btnEliminar, btnRegistrar;
-
+        
+        Button btnRegistrar;
+        ListView listEvento;
         Services controller = new Services();
         Usuario usuario = new Usuario();
 
-
-        protected  override void OnCreate(Bundle bundle)
+        protected  override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            // Set our view from the "main" layout resource
+           
           SetContentView (Resource.Layout.Main);
             //inicia el qr
             MobileBarcodeScanner.Initialize(Application);
-
-            txtID = FindViewById<EditText>(Resource.Id.txtID);
-
-            //listUsuarios = FindViewById<ListView>(Resource.Id.listUsuarios);
-           // btnBuscar = FindViewById<Button>(Resource.Id.btnBuscar);
-          //  btnEliminar = FindViewById<Button>(Resource.Id.btnEliminar);
+            //termina qr
+            
             btnRegistrar = FindViewById<Button>(Resource.Id.btnRegistrar);
+            listEvento = FindViewById<ListView>(Resource.Id.listEventos);
 
+           // var dato = await controller.ListEventos();
 
+           // ArrayAdapter array = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleExpandableListItem1, dato.nombre_evento.ToString());
+
+           // listEvento.Adapter = array;
             //eventos
 
             btnRegistrar.Click += BtnRegistrar_Click;                
                
-            /*
-            btnBuscar.Click += BtnBuscar_Click;
-            btnEliminar.Click += BtnEliminar_Click;
+           /*
 
-            //
-
-            await GetUsuarios();
+            await GetEventos();
             */
         }
 
         private async void BtnRegistrar_Click(object sender, EventArgs e)
         {
+            //lector de QR
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
 
@@ -77,7 +73,7 @@ namespace EventoDeportivoCibertecApp.droid
 
         }
 
-        /* private async Task GetUsuarios()
+        /* private async Task GetEventos()
          {
              try
              {
