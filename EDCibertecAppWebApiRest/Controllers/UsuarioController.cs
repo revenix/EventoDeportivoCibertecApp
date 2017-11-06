@@ -50,7 +50,7 @@ namespace EDCibertecAppWebApiRest.Controllers
                     //query.FirstOrDefault();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

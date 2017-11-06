@@ -372,6 +372,9 @@
           <Parameter Name="login" Type="char" Mode="In" />
           <Parameter Name="clave" Type="char" Mode="In" />
         </Function>
+        <Function Name="sp_Participanteinfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_RegistrarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="login" Type="varchar" Mode="In" />
@@ -912,6 +915,9 @@
             <Parameter Name="login" Mode="In" Type="String" />
             <Parameter Name="clave" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_Participanteinfo" ReturnType="Collection(EventoDeportivoCibertecModel.sp_Participanteinfo_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_RegistrarUsuarios">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="login" Mode="In" Type="String" />
@@ -924,6 +930,14 @@
           <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
           <Property Type="Int32" Name="id_perfil" Nullable="false" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="sp_Participanteinfo_Result">
+          <Property Type="Int32" Name="id_participante" Nullable="false" />
+          <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="sexo" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="valoracion" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="45" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1117,6 +1131,18 @@
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
                 <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Participanteinfo" FunctionName="EventoDeportivoCibertecModel.Store.sp_Participanteinfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_Participanteinfo_Result">
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="valoracion" ColumnName="valoracion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

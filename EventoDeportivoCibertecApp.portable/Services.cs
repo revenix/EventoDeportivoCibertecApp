@@ -16,123 +16,127 @@ namespace EventoDeportivoCibertecApp.portable
 
        // List<Usuario> listUsuarios = new List<Usuario>();
        private const string url = "http://eventodeportivocibertec.azurewebsites.net/api/";
-       
 
-       
         public async Task<Usuario> LoginUsuario(string _usuario ,string _clave)
         {
             var login =$"usuariologin?usuario={_usuario}&clave={_clave}";
 
             var uri = url + login;
-
             var respuestaService = await http.GetAsync(uri);
-
             var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
-
             var usuario = JsonConvert.DeserializeObject<Usuario>(contenido);
-      
             return usuario;
 
         }
 
-
-/*
-
-        public async Task<List<Usuario>> GetUsuarios()
+        public async Task<Participante> ParticipanteInfo(int _id)
         {
+            var par = $"infoparticipante?id={_id}";
 
-            var response = await http.GetAsync(url);
-
-            if (response.IsSuccessStatusCode)
-            {
-
-                var content = await response.Content.ReadAsStringAsync();
-                listUsuarios = JsonConvert.DeserializeObject<List<Usuario>>(content);
-
-            }
-
-            return listUsuarios;
+            var uri = url + par;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var participante = JsonConvert.DeserializeObject<Participante>(contenido);
+            return participante;
 
         }
         /*
-        public async Task<Usuario> GetUsuariosId(int id)
-        {
 
-            var getUrl = $"{url}/{id}";
+                public async Task<List<Usuario>> GetUsuarios()
+                {
 
-            var response = await http.GetAsync(getUrl);
+                    var response = await http.GetAsync(url);
 
-            if (response.IsSuccessStatusCode)
-            {
+                    if (response.IsSuccessStatusCode)
+                    {
 
-                var content = await response.Content.ReadAsStringAsync();
-                usuario = JsonConvert.DeserializeObject<Usuario>(content);
-                return usuario;
+                        var content = await response.Content.ReadAsStringAsync();
+                        listUsuarios = JsonConvert.DeserializeObject<List<Usuario>>(content);
 
-            }
-            else
-            {
-                return null;
-            }
+                    }
 
+                    return listUsuarios;
 
-        }
-        public async Task<string> RegistrarUsuario(int id, string login , string contraseña, int idrol)
-        {
+                }
+                /*
+                public async Task<Usuario> GetUsuariosId(int id)
+                {
 
-            var url = String.Format("http://eventodeportivocibertec.azurewebsites.net/api/Usuario?id={0}&login={1}&contraseña={2}&idrol={3}",id, login ,contraseña,idrol );
-            var http = new HttpClient();
-            var response = await http.PutAsync(url, null);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject(content).ToString();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-        }
+                    var getUrl = $"{url}/{id}";
 
-        public async Task<Usuario> DeleteUsuario(int id)
-        {
+                    var response = await http.GetAsync(getUrl);
 
-            var deleteUrl = $"{url}/{id}";
+                    if (response.IsSuccessStatusCode)
+                    {
 
-            var response = http.DeleteAsync(deleteUrl);
+                        var content = await response.Content.ReadAsStringAsync();
+                        usuario = JsonConvert.DeserializeObject<Usuario>(content);
+                        return usuario;
 
-            var content = await response.Result.Content.ReadAsStringAsync();
-
-            if (response.IsCompleted)
-            {
-
-                usuario = JsonConvert.DeserializeObject<Usuario>(content);
-                return usuario;
-
-            }
-            else
-            {
-                return null;
-            }
+                    }
+                    else
+                    {
+                        return null;
+                    }
 
 
-        }
-        /*
-        public async Task<String> PostUsuario(Usuario usu)
-        {
+                }
+                public async Task<string> RegistrarUsuario(int id, string login , string contraseña, int idrol)
+                {
 
-            var serializer = JsonConvert.SerializeObject(usu);
+                    var url = String.Format("http://eventodeportivocibertec.azurewebsites.net/api/Usuario?id={0}&login={1}&contraseña={2}&idrol={3}",id, login ,contraseña,idrol );
+                    var http = new HttpClient();
+                    var response = await http.PutAsync(url, null);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject(content).ToString();
+                    }
+                    else
+                    {
+                        throw new Exception(response.ReasonPhrase);
+                    }
+                }
 
-            var content = new StringContent(serializer, Encoding.UTF8, "application/json");
+                public async Task<Usuario> DeleteUsuario(int id)
+                {
 
-            var response = await http.PostAsync(url, content);
+                    var deleteUrl = $"{url}/{id}";
 
-            string msg = (response.IsSuccessStatusCode) ? "Registrado" : "Error";
+                    var response = http.DeleteAsync(deleteUrl);
 
-            return msg;
+                    var content = await response.Result.Content.ReadAsStringAsync();
 
-        }
-        */
+                    if (response.IsCompleted)
+                    {
+
+                        usuario = JsonConvert.DeserializeObject<Usuario>(content);
+                        return usuario;
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+
+                }
+                /*
+                public async Task<String> PostUsuario(Usuario usu)
+                {
+
+                    var serializer = JsonConvert.SerializeObject(usu);
+
+                    var content = new StringContent(serializer, Encoding.UTF8, "application/json");
+
+                    var response = await http.PostAsync(url, content);
+
+                    string msg = (response.IsSuccessStatusCode) ? "Registrado" : "Error";
+
+                    return msg;
+
+                }
+                */
 
 
 

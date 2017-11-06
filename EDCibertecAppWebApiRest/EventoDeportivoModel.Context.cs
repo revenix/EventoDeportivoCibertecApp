@@ -80,6 +80,15 @@ namespace EDCibertecAppWebApiRest
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_login_Result>("sp_login", loginParameter, claveParameter);
         }
     
+        public virtual ObjectResult<sp_Participanteinfo_Result> sp_Participanteinfo(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Participanteinfo_Result>("sp_Participanteinfo", idParameter);
+        }
+    
         public virtual int sp_RegistrarUsuarios(Nullable<int> id, string login, string contraseña, Nullable<int> idrol)
         {
             var idParameter = id.HasValue ?

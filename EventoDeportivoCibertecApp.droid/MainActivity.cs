@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using ZXing.Mobile;
+using Android.Content;
 
 namespace EventoDeportivoCibertecApp.droid
 {
@@ -28,7 +29,7 @@ namespace EventoDeportivoCibertecApp.droid
 
             // Set our view from the "main" layout resource
           SetContentView (Resource.Layout.Main);
-            //
+            //inicia el qr
             MobileBarcodeScanner.Initialize(Application);
 
             txtID = FindViewById<EditText>(Resource.Id.txtID);
@@ -59,8 +60,20 @@ namespace EventoDeportivoCibertecApp.droid
             var result = await scanner.Scan();
 
             if (result != null)
-                //    Console.WriteLine("Scanned Barcode: " + result.Text);
+            {
+                var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+
+                activity2.PutExtra("idparticipante", result.Text);
+
+                StartActivity(activity2);
+
                 Toast.MakeText(this, result.Text, ToastLength.Long).Show();
+            }
+
+
+
+
+            //    Console.WriteLine("Scanned Barcode: " + result.Text);
 
         }
 

@@ -42,22 +42,45 @@ namespace EventoDeportivoCibertecApp.droid
              string login = txtlogin.Text;
              string pasword = txtpassword.Text;
 
-             var dato = await controller.LoginUsuario(login , pasword);
+            if (!string.IsNullOrEmpty(login) || !string.IsNullOrEmpty(pasword))
+            {
+                var dato = await controller.LoginUsuario(login, pasword);
 
-
-             var tipoUsuario = dato.descripcion;
-          
-                if (tipoUsuario.Equals("Administrador"))
+                if (dato != null)
                 {
-                    Toast.MakeText(this, "hola " + dato.nombres + " " + dato.descripcion, ToastLength.Short).Show();
+                    var tipoUsuario = dato.descripcion;
 
 
+                    if (tipoUsuario.Equals("Administrador"))
+                    {
+                        Toast.MakeText(this, "Bienvenido " + dato.nombres, ToastLength.Short).Show();
+                        StartActivity(typeof(MainActivity));
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Bienvenido  "+dato.nombres , ToastLength.Short).Show();
+                        StartActivity(typeof(MainActivity));
+                    }
                 }
                 else
                 {
-                    Toast.MakeText(this, "no es admin  ", ToastLength.Short).Show();
-                StartActivity(typeof(MainActivity));
+                    Toast.MakeText(this, "Usuario Incorrecto ", ToastLength.Short).Show();
                 }
+            }else
+            {
+                Toast.MakeText(this, "Campos vacios", ToastLength.Short).Show();
+                
+            }
+
+            
+
+
+             
+             
+
+
+
+
             }
 
         
