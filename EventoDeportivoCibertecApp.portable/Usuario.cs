@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,12 @@ namespace EventoDeportivoCibertecApp.portable
 {
    public class Usuario
     {
+        public string apellidos { get; set; }
+        public string descripcion { get; set; }
+        public int id_perfil { get; set; }
+        public string nombres { get; set; }
 
-        public int idusuario { get; set; }
-        public string login { get; set; }
-        public string contraseña { get; set; }
-        public int idrol { get; set; }
+
     }
+   
 }

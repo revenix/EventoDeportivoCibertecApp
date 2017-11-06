@@ -11,11 +11,11 @@ namespace EDCibertecAppWebApiRest
 {
     using System;
     
-    public partial class sp_BuscaUsuario_Result
+    public partial class sp_login_Result
     {
-        public int idusuario { get; set; }
-        public string login { get; set; }
-        public string contraseña { get; set; }
-        public int idrol { get; set; }
+        public string nombres { get; set; }
+        public string apellidos { get; set; }
+        public int id_perfil { get; set; }
+        public string descripcion { get; set; }
     }
 }

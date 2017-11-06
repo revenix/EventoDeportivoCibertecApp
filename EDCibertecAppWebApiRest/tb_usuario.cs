@@ -10,12 +10,17 @@
 namespace EDCibertecAppWebApiRest
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_listaUsuarios_Result
+    public partial class tb_usuario
     {
-        public int idusuario { get; set; }
+        public int idUsuario { get; set; }
         public string login { get; set; }
-        public string contraseña { get; set; }
-        public int idrol { get; set; }
+        public string clave { get; set; }
+        public int id_Perfil { get; set; }
+        public int id_participante { get; set; }
+    
+        public virtual tb_participante tb_participante { get; set; }
+        public virtual tb_Perfil tb_Perfil { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,30 @@ namespace EventoDeportivoCibertecApp.portable
     {
         HttpClient http = new HttpClient();
         Usuario usuario = new Usuario();
-        List<Usuario> listUsuarios = new List<Usuario>();
 
-        //En ésta url agregar el link tu servicio web
-        const string url = "http://eventodeportivocibertec.azurewebsites.net/api/Usuario";
+       // List<Usuario> listUsuarios = new List<Usuario>();
+       private const string url = "http://eventodeportivocibertec.azurewebsites.net/api/";
+       
+
+       
+        public async Task<Usuario> LoginUsuario(string _usuario ,string _clave)
+        {
+            var login =$"usuariologin?usuario={_usuario}&clave={_clave}";
+
+            var uri = url + login;
+
+            var respuestaService = await http.GetAsync(uri);
+
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+
+            var usuario = JsonConvert.DeserializeObject<Usuario>(contenido);
+      
+            return usuario;
+
+        }
+
+
+/*
 
         public async Task<List<Usuario>> GetUsuarios()
         {
@@ -33,7 +54,7 @@ namespace EventoDeportivoCibertecApp.portable
             return listUsuarios;
 
         }
-
+        /*
         public async Task<Usuario> GetUsuariosId(int id)
         {
 

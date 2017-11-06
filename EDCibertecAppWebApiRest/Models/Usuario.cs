@@ -1,18 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EDCibertecAppWebApiRest.Models
 {
-    public class Usuario
+   public class Usuario
     {
-       
-        public int idusuario { get; set; }
-        public string login { get; set; }
-        public string contraseña { get; set; }
-        public int idrol { get; set; }
-
+        
+        public string nombres { get; set; }
+        
+        public string apellidos { get; set; }
+        
+        public int id_perfil { get; set; }
+        
+        public string descripcion { get; set; }
     }
+   
 }

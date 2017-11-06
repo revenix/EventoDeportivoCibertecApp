@@ -4,12 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="84b8aec1d9b14c79a4a47101401ec40e" Name="Diagram1">
-        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.enlace" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.rol" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.usuario" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="EventoDeportivoCibertecModel.FK__rol__idenlace__6FE99F9F" ManuallyRouted="false" />
-        <AssociationConnector Association="EventoDeportivoCibertecModel.FK__usuario__idrol__74AE54BC" ManuallyRouted="false" />
+      <Diagram DiagramId="c75c863b2a3041009c2909b537063fb2" Name="Diagram1">
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.sede" Width="1.5" PointX="5.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_categoria" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_Club" Width="1.5" PointX="1.125" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_comprobante_pago" Width="1.5" PointX="14.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_detalle_modalidad" Width="1.5" PointX="10.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_detalle_participante" Width="1.5" PointX="4.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_disciplina" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_equipo" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_evento" Width="1.5" PointX="8" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_ficha_inscripcion" Width="1.5" PointX="12.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_menu" Width="1.5" PointX="6" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_modalidad" Width="1.5" PointX="8" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_participante" Width="1.5" PointX="2.375" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_Perfil" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_subMenu" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventoDeportivoCibertecModel.tb_usuario" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_evento_sede" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_modalidad_tb_categoria1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_participante_tb_Club" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_comprobante_pago_tb_ficha_inscripcion1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_evento_has_tb_modalidad_tb_evento1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_evento_has_tb_modalidad_tb_modalidad1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_ficha_inscripcion_tb_detalle_modalidad1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_equipo_has_tb_participante_tb_equipo1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_equipo_has_tb_participante_tb_participante1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_modalidad_tb_disciplina" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_ficha_inscripcion_tb_equipo1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_subMenu_tb_menu1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_usuario_tb_participante1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.fk_tb_usuario_tb_perfil1" ManuallyRouted="false" />
+        <AssociationConnector Association="EventoDeportivoCibertecModel.tb_Acceso" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

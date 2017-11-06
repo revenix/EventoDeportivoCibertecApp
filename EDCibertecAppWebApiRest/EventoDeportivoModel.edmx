@@ -5,52 +5,359 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EventoDeportivoCibertecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="enlace">
+        <EntityType Name="sede">
           <Key>
-            <PropertyRef Name="idenlace" />
+            <PropertyRef Name="id_Sede" />
           </Key>
-          <Property Name="idenlace" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="45" />
-          <Property Name="ruta" Type="varchar" MaxLength="45" />
+          <Property Name="id_Sede" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="direccion" Type="varchar" MaxLength="45" />
+          <Property Name="telefono" Type="varchar" MaxLength="45" />
         </EntityType>
-        <EntityType Name="rol">
+        <EntityType Name="tb_Acceso">
           <Key>
-            <PropertyRef Name="idrol" />
+            <PropertyRef Name="id_subMenu" />
+            <PropertyRef Name="id_Perfil" />
           </Key>
-          <Property Name="idrol" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="45" />
-          <Property Name="idenlace" Type="int" Nullable="false" />
+          <Property Name="id_subMenu" Type="int" Nullable="false" />
+          <Property Name="id_Perfil" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="usuario">
+        <EntityType Name="tb_categoria">
           <Key>
-            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="id_categoria" />
           </Key>
-          <Property Name="idusuario" Type="int" Nullable="false" />
+          <Property Name="id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Club">
+          <Key>
+            <PropertyRef Name="idClub" />
+          </Key>
+          <Property Name="idClub" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Club" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="tb_comprobante_pago">
+          <Key>
+            <PropertyRef Name="id_comprobante_pago" />
+          </Key>
+          <Property Name="id_comprobante_pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="num_ficha" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_detalle_modalidad">
+          <Key>
+            <PropertyRef Name="id_evento" />
+            <PropertyRef Name="id_modalidad" />
+          </Key>
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="id_modalidad" Type="int" Nullable="false" />
+          <Property Name="num_hombres" Type="int" />
+          <Property Name="num_mujeres" Type="int" />
+          <Property Name="cant_max_equipos" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_detalle_participante">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_equipo" Type="int" Nullable="false" />
+          <Property Name="id_participante" Type="int" Nullable="false" />
+          <Property Name="puesto" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_disciplina">
+          <Key>
+            <PropertyRef Name="id_disciplina" />
+          </Key>
+          <Property Name="id_disciplina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_equipo">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fec_reg" Type="date" Nullable="false" />
+          <Property Name="color_uniforme" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="foto" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tb_evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_evento" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_final" Type="date" Nullable="false" />
+          <Property Name="idSede" Type="int" Nullable="false" />
+          <Property Name="lugar" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fecha_in_inscripcion" Type="date" />
+          <Property Name="fecha_fin_inscripcion" Type="date" />
+        </EntityType>
+        <EntityType Name="tb_ficha_inscripcion">
+          <Key>
+            <PropertyRef Name="num_ficha" />
+          </Key>
+          <Property Name="num_ficha" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="date" Nullable="false" />
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="id_modalidad" Type="int" Nullable="false" />
+          <Property Name="id_equipo" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_menu">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionMenu" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="tb_modalidad">
+          <Key>
+            <PropertyRef Name="id_modalidad" />
+          </Key>
+          <Property Name="id_modalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_disciplina" Type="int" Nullable="false" />
+          <Property Name="id_categoria" Type="int" Nullable="false" />
+          <Property Name="fecha_registro" Type="date" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_participante">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="fec_nacimiento" Type="date" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="foto" Type="varbinary(max)" />
+          <Property Name="estado" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="valoracion" Type="varchar" MaxLength="2" />
+          <Property Name="idClub" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Perfil">
+          <Key>
+            <PropertyRef Name="id_Perfil" />
+          </Key>
+          <Property Name="id_Perfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="tb_subMenu">
+          <Key>
+            <PropertyRef Name="id_subMenu" />
+          </Key>
+          <Property Name="id_subMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="45" />
+          <Property Name="url" Type="varchar" MaxLength="45" />
+          <Property Name="id_menu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="login" Type="varchar" MaxLength="45" />
-          <Property Name="contraseña" Type="varchar" MaxLength="45" />
-          <Property Name="idrol" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="45" />
+          <Property Name="id_Perfil" Type="int" Nullable="false" />
+          <Property Name="id_participante" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__rol__idenlace__6FE99F9F">
-          <End Role="enlace" Type="Self.enlace" Multiplicity="1" />
-          <End Role="rol" Type="Self.rol" Multiplicity="*" />
+        <Association Name="fk_tb_comprobante_pago_tb_ficha_inscripcion1">
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="1" />
+          <End Role="tb_comprobante_pago" Type="Self.tb_comprobante_pago" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="enlace">
-              <PropertyRef Name="idenlace" />
+            <Principal Role="tb_ficha_inscripcion">
+              <PropertyRef Name="num_ficha" />
             </Principal>
-            <Dependent Role="rol">
-              <PropertyRef Name="idenlace" />
+            <Dependent Role="tb_comprobante_pago">
+              <PropertyRef Name="num_ficha" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__usuario__idrol__74AE54BC">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
-          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+        <Association Name="fk_tb_equipo_has_tb_participante_tb_equipo1">
+          <End Role="tb_equipo" Type="Self.tb_equipo" Multiplicity="1" />
+          <End Role="tb_detalle_participante" Type="Self.tb_detalle_participante" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="rol">
-              <PropertyRef Name="idrol" />
+            <Principal Role="tb_equipo">
+              <PropertyRef Name="id_equipo" />
             </Principal>
-            <Dependent Role="usuario">
-              <PropertyRef Name="idrol" />
+            <Dependent Role="tb_detalle_participante">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_equipo_has_tb_participante_tb_participante1">
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="1" />
+          <End Role="tb_detalle_participante" Type="Self.tb_detalle_participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_participante">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="tb_detalle_participante">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_evento_has_tb_modalidad_tb_evento1">
+          <End Role="tb_evento" Type="Self.tb_evento" Multiplicity="1" />
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_evento_has_tb_modalidad_tb_modalidad1">
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="1" />
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_modalidad">
+              <PropertyRef Name="id_modalidad" />
+            </Principal>
+            <Dependent Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_evento_sede">
+          <End Role="sede" Type="Self.sede" Multiplicity="1" />
+          <End Role="tb_evento" Type="Self.tb_evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sede">
+              <PropertyRef Name="id_Sede" />
+            </Principal>
+            <Dependent Role="tb_evento">
+              <PropertyRef Name="idSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_ficha_inscripcion_tb_detalle_modalidad1">
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="1" />
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_evento" />
+              <PropertyRef Name="id_modalidad" />
+            </Principal>
+            <Dependent Role="tb_ficha_inscripcion">
+              <PropertyRef Name="id_evento" />
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_ficha_inscripcion_tb_equipo1">
+          <End Role="tb_equipo" Type="Self.tb_equipo" Multiplicity="1" />
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_equipo">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="tb_ficha_inscripcion">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_modalidad_tb_categoria1">
+          <End Role="tb_categoria" Type="Self.tb_categoria" Multiplicity="1" />
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_categoria">
+              <PropertyRef Name="id_categoria" />
+            </Principal>
+            <Dependent Role="tb_modalidad">
+              <PropertyRef Name="id_categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_modalidad_tb_disciplina">
+          <End Role="tb_disciplina" Type="Self.tb_disciplina" Multiplicity="1" />
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_disciplina">
+              <PropertyRef Name="id_disciplina" />
+            </Principal>
+            <Dependent Role="tb_modalidad">
+              <PropertyRef Name="id_disciplina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_participante_tb_Club">
+          <End Role="tb_Club" Type="Self.tb_Club" Multiplicity="1" />
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="tb_participante">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_subMenu_has_tb_Perfil_tb_Perfil1">
+          <End Role="tb_Perfil" Type="Self.tb_Perfil" Multiplicity="1" />
+          <End Role="tb_Acceso" Type="Self.tb_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Perfil">
+              <PropertyRef Name="id_Perfil" />
+            </Principal>
+            <Dependent Role="tb_Acceso">
+              <PropertyRef Name="id_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_subMenu_has_tb_Perfil_tb_subMenu1">
+          <End Role="tb_subMenu" Type="Self.tb_subMenu" Multiplicity="1" />
+          <End Role="tb_Acceso" Type="Self.tb_Acceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_subMenu">
+              <PropertyRef Name="id_subMenu" />
+            </Principal>
+            <Dependent Role="tb_Acceso">
+              <PropertyRef Name="id_subMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_subMenu_tb_menu1">
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="1" />
+          <End Role="tb_subMenu" Type="Self.tb_subMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_menu">
+              <PropertyRef Name="id_menu" />
+            </Principal>
+            <Dependent Role="tb_subMenu">
+              <PropertyRef Name="id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_usuario_tb_participante1">
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_participante">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_usuario_tb_perfil1">
+          <End Role="tb_Perfil" Type="Self.tb_Perfil" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Perfil">
+              <PropertyRef Name="id_Perfil" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_Perfil" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -61,6 +368,10 @@
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_listaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login" Type="char" Mode="In" />
+          <Parameter Name="clave" Type="char" Mode="In" />
+        </Function>
         <Function Name="sp_RegistrarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="login" Type="varchar" Mode="In" />
@@ -68,16 +379,86 @@
           <Parameter Name="idrol" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="EventoDeportivoCibertecModelStoreContainer">
-          <EntitySet Name="enlace" EntityType="Self.enlace" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__rol__idenlace__6FE99F9F" Association="Self.FK__rol__idenlace__6FE99F9F">
-            <End Role="enlace" EntitySet="enlace" />
-            <End Role="rol" EntitySet="rol" />
+          <EntitySet Name="sede" EntityType="Self.sede" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Acceso" EntityType="Self.tb_Acceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Club" EntityType="Self.tb_Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_comprobante_pago" EntityType="Self.tb_comprobante_pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_detalle_modalidad" EntityType="Self.tb_detalle_modalidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_detalle_participante" EntityType="Self.tb_detalle_participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_disciplina" EntityType="Self.tb_disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_equipo" EntityType="Self.tb_equipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_evento" EntityType="Self.tb_evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ficha_inscripcion" EntityType="Self.tb_ficha_inscripcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_menu" EntityType="Self.tb_menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_modalidad" EntityType="Self.tb_modalidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_participante" EntityType="Self.tb_participante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Perfil" EntityType="Self.tb_Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_subMenu" EntityType="Self.tb_subMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_tb_comprobante_pago_tb_ficha_inscripcion1" Association="Self.fk_tb_comprobante_pago_tb_ficha_inscripcion1">
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+            <End Role="tb_comprobante_pago" EntitySet="tb_comprobante_pago" />
           </AssociationSet>
-          <AssociationSet Name="FK__usuario__idrol__74AE54BC" Association="Self.FK__usuario__idrol__74AE54BC">
-            <End Role="rol" EntitySet="rol" />
-            <End Role="usuario" EntitySet="usuario" />
+          <AssociationSet Name="fk_tb_equipo_has_tb_participante_tb_equipo1" Association="Self.fk_tb_equipo_has_tb_participante_tb_equipo1">
+            <End Role="tb_equipo" EntitySet="tb_equipo" />
+            <End Role="tb_detalle_participante" EntitySet="tb_detalle_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_equipo_has_tb_participante_tb_participante1" Association="Self.fk_tb_equipo_has_tb_participante_tb_participante1">
+            <End Role="tb_participante" EntitySet="tb_participante" />
+            <End Role="tb_detalle_participante" EntitySet="tb_detalle_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_evento_has_tb_modalidad_tb_evento1" Association="Self.fk_tb_evento_has_tb_modalidad_tb_evento1">
+            <End Role="tb_evento" EntitySet="tb_evento" />
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_evento_has_tb_modalidad_tb_modalidad1" Association="Self.fk_tb_evento_has_tb_modalidad_tb_modalidad1">
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_evento_sede" Association="Self.fk_tb_evento_sede">
+            <End Role="sede" EntitySet="sede" />
+            <End Role="tb_evento" EntitySet="tb_evento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_ficha_inscripcion_tb_detalle_modalidad1" Association="Self.fk_tb_ficha_inscripcion_tb_detalle_modalidad1">
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_ficha_inscripcion_tb_equipo1" Association="Self.fk_tb_ficha_inscripcion_tb_equipo1">
+            <End Role="tb_equipo" EntitySet="tb_equipo" />
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_modalidad_tb_categoria1" Association="Self.fk_tb_modalidad_tb_categoria1">
+            <End Role="tb_categoria" EntitySet="tb_categoria" />
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_modalidad_tb_disciplina" Association="Self.fk_tb_modalidad_tb_disciplina">
+            <End Role="tb_disciplina" EntitySet="tb_disciplina" />
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_participante_tb_Club" Association="Self.fk_tb_participante_tb_Club">
+            <End Role="tb_Club" EntitySet="tb_Club" />
+            <End Role="tb_participante" EntitySet="tb_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_subMenu_has_tb_Perfil_tb_Perfil1" Association="Self.fk_tb_subMenu_has_tb_Perfil_tb_Perfil1">
+            <End Role="tb_Perfil" EntitySet="tb_Perfil" />
+            <End Role="tb_Acceso" EntitySet="tb_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_subMenu_has_tb_Perfil_tb_subMenu1" Association="Self.fk_tb_subMenu_has_tb_Perfil_tb_subMenu1">
+            <End Role="tb_subMenu" EntitySet="tb_subMenu" />
+            <End Role="tb_Acceso" EntitySet="tb_Acceso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_subMenu_tb_menu1" Association="Self.fk_tb_subMenu_tb_menu1">
+            <End Role="tb_menu" EntitySet="tb_menu" />
+            <End Role="tb_subMenu" EntitySet="tb_subMenu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_usuario_tb_participante1" Association="Self.fk_tb_usuario_tb_participante1">
+            <End Role="tb_participante" EntitySet="tb_participante" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_usuario_tb_perfil1" Association="Self.fk_tb_usuario_tb_perfil1">
+            <End Role="tb_Perfil" EntitySet="tb_Perfil" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -85,78 +466,452 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventoDeportivoCibertecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="enlace">
+        <EntityType Name="sede">
           <Key>
-            <PropertyRef Name="idenlace" />
+            <PropertyRef Name="id_Sede" />
           </Key>
-          <Property Name="idenlace" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="ruta" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="rol" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="enlace" ToRole="rol" />
+          <Property Name="id_Sede" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_evento" Relationship="Self.fk_tb_evento_sede" FromRole="sede" ToRole="tb_evento" />
         </EntityType>
-        <EntityType Name="rol">
+        <EntityType Name="tb_categoria">
           <Key>
-            <PropertyRef Name="idrol" />
+            <PropertyRef Name="id_categoria" />
           </Key>
-          <Property Name="idrol" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="idenlace" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="enlace" Relationship="Self.FK__rol__idenlace__6FE99F9F" FromRole="rol" ToRole="enlace" />
-          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="rol" ToRole="usuario" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_modalidad" Relationship="Self.fk_tb_modalidad_tb_categoria1" FromRole="tb_categoria" ToRole="tb_modalidad" />
         </EntityType>
-        <EntityType Name="usuario">
+        <EntityType Name="tb_Club">
           <Key>
-            <PropertyRef Name="idusuario" />
+            <PropertyRef Name="idClub" />
           </Key>
-          <Property Name="idusuario" Type="Int32" Nullable="false" />
+          <Property Name="idClub" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Club" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_participante" Relationship="Self.fk_tb_participante_tb_Club" FromRole="tb_Club" ToRole="tb_participante" />
+        </EntityType>
+        <EntityType Name="tb_comprobante_pago">
+          <Key>
+            <PropertyRef Name="id_comprobante_pago" />
+          </Key>
+          <Property Name="id_comprobante_pago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="num_ficha" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_ficha_inscripcion" Relationship="Self.fk_tb_comprobante_pago_tb_ficha_inscripcion1" FromRole="tb_comprobante_pago" ToRole="tb_ficha_inscripcion" />
+        </EntityType>
+        <EntityType Name="tb_detalle_modalidad">
+          <Key>
+            <PropertyRef Name="id_evento" />
+            <PropertyRef Name="id_modalidad" />
+          </Key>
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="id_modalidad" Type="Int32" Nullable="false" />
+          <Property Name="num_hombres" Type="Int32" />
+          <Property Name="num_mujeres" Type="Int32" />
+          <Property Name="cant_max_equipos" Type="Int32" />
+          <NavigationProperty Name="tb_evento" Relationship="Self.fk_tb_evento_has_tb_modalidad_tb_evento1" FromRole="tb_detalle_modalidad" ToRole="tb_evento" />
+          <NavigationProperty Name="tb_modalidad" Relationship="Self.fk_tb_evento_has_tb_modalidad_tb_modalidad1" FromRole="tb_detalle_modalidad" ToRole="tb_modalidad" />
+          <NavigationProperty Name="tb_ficha_inscripcion" Relationship="Self.fk_tb_ficha_inscripcion_tb_detalle_modalidad1" FromRole="tb_detalle_modalidad" ToRole="tb_ficha_inscripcion" />
+        </EntityType>
+        <EntityType Name="tb_detalle_participante">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_equipo" Type="Int32" Nullable="false" />
+          <Property Name="id_participante" Type="Int32" Nullable="false" />
+          <Property Name="puesto" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_equipo" Relationship="Self.fk_tb_equipo_has_tb_participante_tb_equipo1" FromRole="tb_detalle_participante" ToRole="tb_equipo" />
+          <NavigationProperty Name="tb_participante" Relationship="Self.fk_tb_equipo_has_tb_participante_tb_participante1" FromRole="tb_detalle_participante" ToRole="tb_participante" />
+        </EntityType>
+        <EntityType Name="tb_disciplina">
+          <Key>
+            <PropertyRef Name="id_disciplina" />
+          </Key>
+          <Property Name="id_disciplina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_modalidad" Relationship="Self.fk_tb_modalidad_tb_disciplina" FromRole="tb_disciplina" ToRole="tb_modalidad" />
+        </EntityType>
+        <EntityType Name="tb_equipo">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fec_reg" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="color_uniforme" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tb_detalle_participante" Relationship="Self.fk_tb_equipo_has_tb_participante_tb_equipo1" FromRole="tb_equipo" ToRole="tb_detalle_participante" />
+          <NavigationProperty Name="tb_ficha_inscripcion" Relationship="Self.fk_tb_ficha_inscripcion_tb_equipo1" FromRole="tb_equipo" ToRole="tb_ficha_inscripcion" />
+        </EntityType>
+        <EntityType Name="tb_evento">
+          <Key>
+            <PropertyRef Name="idEvento" />
+          </Key>
+          <Property Name="idEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_evento" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_final" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idSede" Type="Int32" Nullable="false" />
+          <Property Name="lugar" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_in_inscripcion" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin_inscripcion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="sede" Relationship="Self.fk_tb_evento_sede" FromRole="tb_evento" ToRole="sede" />
+          <NavigationProperty Name="tb_detalle_modalidad" Relationship="Self.fk_tb_evento_has_tb_modalidad_tb_evento1" FromRole="tb_evento" ToRole="tb_detalle_modalidad" />
+        </EntityType>
+        <EntityType Name="tb_ficha_inscripcion">
+          <Key>
+            <PropertyRef Name="num_ficha" />
+          </Key>
+          <Property Name="num_ficha" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="id_modalidad" Type="Int32" Nullable="false" />
+          <Property Name="id_equipo" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_comprobante_pago" Relationship="Self.fk_tb_comprobante_pago_tb_ficha_inscripcion1" FromRole="tb_ficha_inscripcion" ToRole="tb_comprobante_pago" />
+          <NavigationProperty Name="tb_detalle_modalidad" Relationship="Self.fk_tb_ficha_inscripcion_tb_detalle_modalidad1" FromRole="tb_ficha_inscripcion" ToRole="tb_detalle_modalidad" />
+          <NavigationProperty Name="tb_equipo" Relationship="Self.fk_tb_ficha_inscripcion_tb_equipo1" FromRole="tb_ficha_inscripcion" ToRole="tb_equipo" />
+        </EntityType>
+        <EntityType Name="tb_menu">
+          <Key>
+            <PropertyRef Name="id_menu" />
+          </Key>
+          <Property Name="id_menu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionMenu" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_subMenu" Relationship="Self.fk_tb_subMenu_tb_menu1" FromRole="tb_menu" ToRole="tb_subMenu" />
+        </EntityType>
+        <EntityType Name="tb_modalidad">
+          <Key>
+            <PropertyRef Name="id_modalidad" />
+          </Key>
+          <Property Name="id_modalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_disciplina" Type="Int32" Nullable="false" />
+          <Property Name="id_categoria" Type="Int32" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_categoria" Relationship="Self.fk_tb_modalidad_tb_categoria1" FromRole="tb_modalidad" ToRole="tb_categoria" />
+          <NavigationProperty Name="tb_detalle_modalidad" Relationship="Self.fk_tb_evento_has_tb_modalidad_tb_modalidad1" FromRole="tb_modalidad" ToRole="tb_detalle_modalidad" />
+          <NavigationProperty Name="tb_disciplina" Relationship="Self.fk_tb_modalidad_tb_disciplina" FromRole="tb_modalidad" ToRole="tb_disciplina" />
+        </EntityType>
+        <EntityType Name="tb_participante">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fec_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="sexo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="valoracion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="idClub" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_Club" Relationship="Self.fk_tb_participante_tb_Club" FromRole="tb_participante" ToRole="tb_Club" />
+          <NavigationProperty Name="tb_detalle_participante" Relationship="Self.fk_tb_equipo_has_tb_participante_tb_participante1" FromRole="tb_participante" ToRole="tb_detalle_participante" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_tb_usuario_tb_participante1" FromRole="tb_participante" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_Perfil">
+          <Key>
+            <PropertyRef Name="id_Perfil" />
+          </Key>
+          <Property Name="id_Perfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_tb_usuario_tb_perfil1" FromRole="tb_Perfil" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_subMenu" Relationship="Self.tb_Acceso" FromRole="tb_Perfil" ToRole="tb_subMenu" />
+        </EntityType>
+        <EntityType Name="tb_subMenu">
+          <Key>
+            <PropertyRef Name="id_subMenu" />
+          </Key>
+          <Property Name="id_subMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="id_menu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_menu" Relationship="Self.fk_tb_subMenu_tb_menu1" FromRole="tb_subMenu" ToRole="tb_menu" />
+          <NavigationProperty Name="tb_Perfil" Relationship="Self.tb_Acceso" FromRole="tb_subMenu" ToRole="tb_Perfil" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="contraseña" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="idrol" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="rol" Relationship="Self.FK__usuario__idrol__74AE54BC" FromRole="usuario" ToRole="rol" />
+          <Property Name="clave" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="id_Perfil" Type="Int32" Nullable="false" />
+          <Property Name="id_participante" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_participante" Relationship="Self.fk_tb_usuario_tb_participante1" FromRole="tb_usuario" ToRole="tb_participante" />
+          <NavigationProperty Name="tb_Perfil" Relationship="Self.fk_tb_usuario_tb_perfil1" FromRole="tb_usuario" ToRole="tb_Perfil" />
         </EntityType>
-        <Association Name="FK__rol__idenlace__6FE99F9F">
-          <End Role="enlace" Type="Self.enlace" Multiplicity="1" />
-          <End Role="rol" Type="Self.rol" Multiplicity="*" />
+        <Association Name="fk_tb_evento_sede">
+          <End Role="sede" Type="Self.sede" Multiplicity="1" />
+          <End Role="tb_evento" Type="Self.tb_evento" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="enlace">
-              <PropertyRef Name="idenlace" />
+            <Principal Role="sede">
+              <PropertyRef Name="id_Sede" />
             </Principal>
-            <Dependent Role="rol">
-              <PropertyRef Name="idenlace" />
+            <Dependent Role="tb_evento">
+              <PropertyRef Name="idSede" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__usuario__idrol__74AE54BC">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
-          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+        <Association Name="fk_tb_modalidad_tb_categoria1">
+          <End Role="tb_categoria" Type="Self.tb_categoria" Multiplicity="1" />
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="rol">
-              <PropertyRef Name="idrol" />
+            <Principal Role="tb_categoria">
+              <PropertyRef Name="id_categoria" />
             </Principal>
-            <Dependent Role="usuario">
-              <PropertyRef Name="idrol" />
+            <Dependent Role="tb_modalidad">
+              <PropertyRef Name="id_categoria" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_participante_tb_Club">
+          <End Role="tb_Club" Type="Self.tb_Club" Multiplicity="1" />
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Club">
+              <PropertyRef Name="idClub" />
+            </Principal>
+            <Dependent Role="tb_participante">
+              <PropertyRef Name="idClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_comprobante_pago_tb_ficha_inscripcion1">
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="1" />
+          <End Role="tb_comprobante_pago" Type="Self.tb_comprobante_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_ficha_inscripcion">
+              <PropertyRef Name="num_ficha" />
+            </Principal>
+            <Dependent Role="tb_comprobante_pago">
+              <PropertyRef Name="num_ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_evento_has_tb_modalidad_tb_evento1">
+          <End Role="tb_evento" Type="Self.tb_evento" Multiplicity="1" />
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_evento">
+              <PropertyRef Name="idEvento" />
+            </Principal>
+            <Dependent Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_evento_has_tb_modalidad_tb_modalidad1">
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="1" />
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_modalidad">
+              <PropertyRef Name="id_modalidad" />
+            </Principal>
+            <Dependent Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_ficha_inscripcion_tb_detalle_modalidad1">
+          <End Role="tb_detalle_modalidad" Type="Self.tb_detalle_modalidad" Multiplicity="1" />
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_detalle_modalidad">
+              <PropertyRef Name="id_evento" />
+              <PropertyRef Name="id_modalidad" />
+            </Principal>
+            <Dependent Role="tb_ficha_inscripcion">
+              <PropertyRef Name="id_evento" />
+              <PropertyRef Name="id_modalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_equipo_has_tb_participante_tb_equipo1">
+          <End Role="tb_equipo" Type="Self.tb_equipo" Multiplicity="1" />
+          <End Role="tb_detalle_participante" Type="Self.tb_detalle_participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_equipo">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="tb_detalle_participante">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_equipo_has_tb_participante_tb_participante1">
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="1" />
+          <End Role="tb_detalle_participante" Type="Self.tb_detalle_participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_participante">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="tb_detalle_participante">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_modalidad_tb_disciplina">
+          <End Role="tb_disciplina" Type="Self.tb_disciplina" Multiplicity="1" />
+          <End Role="tb_modalidad" Type="Self.tb_modalidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_disciplina">
+              <PropertyRef Name="id_disciplina" />
+            </Principal>
+            <Dependent Role="tb_modalidad">
+              <PropertyRef Name="id_disciplina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_ficha_inscripcion_tb_equipo1">
+          <End Role="tb_equipo" Type="Self.tb_equipo" Multiplicity="1" />
+          <End Role="tb_ficha_inscripcion" Type="Self.tb_ficha_inscripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_equipo">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="tb_ficha_inscripcion">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_subMenu_tb_menu1">
+          <End Role="tb_menu" Type="Self.tb_menu" Multiplicity="1" />
+          <End Role="tb_subMenu" Type="Self.tb_subMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_menu">
+              <PropertyRef Name="id_menu" />
+            </Principal>
+            <Dependent Role="tb_subMenu">
+              <PropertyRef Name="id_menu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_usuario_tb_participante1">
+          <End Role="tb_participante" Type="Self.tb_participante" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_participante">
+              <PropertyRef Name="id_participante" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_participante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tb_usuario_tb_perfil1">
+          <End Role="tb_Perfil" Type="Self.tb_Perfil" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Perfil">
+              <PropertyRef Name="id_Perfil" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tb_Acceso">
+          <End Role="tb_Perfil" Type="Self.tb_Perfil" Multiplicity="*" />
+          <End Role="tb_subMenu" Type="Self.tb_subMenu" Multiplicity="*" />
         </Association>
         <EntityContainer Name="EventoDeportivoCibertecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="enlace" EntityType="Self.enlace" />
-          <EntitySet Name="rol" EntityType="Self.rol" />
-          <EntitySet Name="usuario" EntityType="Self.usuario" />
-          <AssociationSet Name="FK__rol__idenlace__6FE99F9F" Association="Self.FK__rol__idenlace__6FE99F9F">
-            <End Role="enlace" EntitySet="enlace" />
-            <End Role="rol" EntitySet="rol" />
+          <EntitySet Name="sedes" EntityType="Self.sede" />
+          <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
+          <EntitySet Name="tb_Club" EntityType="Self.tb_Club" />
+          <EntitySet Name="tb_comprobante_pago" EntityType="Self.tb_comprobante_pago" />
+          <EntitySet Name="tb_detalle_modalidad" EntityType="Self.tb_detalle_modalidad" />
+          <EntitySet Name="tb_detalle_participante" EntityType="Self.tb_detalle_participante" />
+          <EntitySet Name="tb_disciplina" EntityType="Self.tb_disciplina" />
+          <EntitySet Name="tb_equipo" EntityType="Self.tb_equipo" />
+          <EntitySet Name="tb_evento" EntityType="Self.tb_evento" />
+          <EntitySet Name="tb_ficha_inscripcion" EntityType="Self.tb_ficha_inscripcion" />
+          <EntitySet Name="tb_menu" EntityType="Self.tb_menu" />
+          <EntitySet Name="tb_modalidad" EntityType="Self.tb_modalidad" />
+          <EntitySet Name="tb_participante" EntityType="Self.tb_participante" />
+          <EntitySet Name="tb_Perfil" EntityType="Self.tb_Perfil" />
+          <EntitySet Name="tb_subMenu" EntityType="Self.tb_subMenu" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
+          <AssociationSet Name="fk_tb_evento_sede" Association="Self.fk_tb_evento_sede">
+            <End Role="sede" EntitySet="sedes" />
+            <End Role="tb_evento" EntitySet="tb_evento" />
           </AssociationSet>
-          <AssociationSet Name="FK__usuario__idrol__74AE54BC" Association="Self.FK__usuario__idrol__74AE54BC">
-            <End Role="rol" EntitySet="rol" />
-            <End Role="usuario" EntitySet="usuario" />
+          <AssociationSet Name="fk_tb_modalidad_tb_categoria1" Association="Self.fk_tb_modalidad_tb_categoria1">
+            <End Role="tb_categoria" EntitySet="tb_categoria" />
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
           </AssociationSet>
-          <FunctionImport Name="sp_BuscaUsuario" ReturnType="Collection(EventoDeportivoCibertecModel.sp_BuscaUsuario_Result)">
+          <AssociationSet Name="fk_tb_participante_tb_Club" Association="Self.fk_tb_participante_tb_Club">
+            <End Role="tb_Club" EntitySet="tb_Club" />
+            <End Role="tb_participante" EntitySet="tb_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_comprobante_pago_tb_ficha_inscripcion1" Association="Self.fk_tb_comprobante_pago_tb_ficha_inscripcion1">
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+            <End Role="tb_comprobante_pago" EntitySet="tb_comprobante_pago" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_evento_has_tb_modalidad_tb_evento1" Association="Self.fk_tb_evento_has_tb_modalidad_tb_evento1">
+            <End Role="tb_evento" EntitySet="tb_evento" />
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_evento_has_tb_modalidad_tb_modalidad1" Association="Self.fk_tb_evento_has_tb_modalidad_tb_modalidad1">
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_ficha_inscripcion_tb_detalle_modalidad1" Association="Self.fk_tb_ficha_inscripcion_tb_detalle_modalidad1">
+            <End Role="tb_detalle_modalidad" EntitySet="tb_detalle_modalidad" />
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_equipo_has_tb_participante_tb_equipo1" Association="Self.fk_tb_equipo_has_tb_participante_tb_equipo1">
+            <End Role="tb_equipo" EntitySet="tb_equipo" />
+            <End Role="tb_detalle_participante" EntitySet="tb_detalle_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_equipo_has_tb_participante_tb_participante1" Association="Self.fk_tb_equipo_has_tb_participante_tb_participante1">
+            <End Role="tb_participante" EntitySet="tb_participante" />
+            <End Role="tb_detalle_participante" EntitySet="tb_detalle_participante" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_modalidad_tb_disciplina" Association="Self.fk_tb_modalidad_tb_disciplina">
+            <End Role="tb_disciplina" EntitySet="tb_disciplina" />
+            <End Role="tb_modalidad" EntitySet="tb_modalidad" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_ficha_inscripcion_tb_equipo1" Association="Self.fk_tb_ficha_inscripcion_tb_equipo1">
+            <End Role="tb_equipo" EntitySet="tb_equipo" />
+            <End Role="tb_ficha_inscripcion" EntitySet="tb_ficha_inscripcion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_subMenu_tb_menu1" Association="Self.fk_tb_subMenu_tb_menu1">
+            <End Role="tb_menu" EntitySet="tb_menu" />
+            <End Role="tb_subMenu" EntitySet="tb_subMenu" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_usuario_tb_participante1" Association="Self.fk_tb_usuario_tb_participante1">
+            <End Role="tb_participante" EntitySet="tb_participante" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tb_usuario_tb_perfil1" Association="Self.fk_tb_usuario_tb_perfil1">
+            <End Role="tb_Perfil" EntitySet="tb_Perfil" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="tb_Acceso" Association="Self.tb_Acceso">
+            <End Role="tb_Perfil" EntitySet="tb_Perfil" />
+            <End Role="tb_subMenu" EntitySet="tb_subMenu" />
+          </AssociationSet>
+          <FunctionImport Name="sp_BuscaUsuario">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_EliminaUsuario">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_listaUsuarios" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaUsuarios_Result)" />
+          <FunctionImport Name="sp_listaUsuarios" />
+          <FunctionImport Name="sp_login" ReturnType="Collection(EventoDeportivoCibertecModel.sp_login_Result)">
+            <Parameter Name="login" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_RegistrarUsuarios">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="login" Mode="In" Type="String" />
@@ -164,17 +919,11 @@
             <Parameter Name="idrol" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="sp_BuscaUsuario_Result">
-          <Property Type="Int32" Name="idusuario" Nullable="false" />
-          <Property Type="String" Name="login" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="contraseña" Nullable="true" MaxLength="45" />
-          <Property Type="Int32" Name="idrol" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="sp_listaUsuarios_Result">
-          <Property Type="Int32" Name="idusuario" Nullable="false" />
-          <Property Type="String" Name="login" Nullable="true" MaxLength="45" />
-          <Property Type="String" Name="contraseña" Nullable="true" MaxLength="45" />
-          <Property Type="Int32" Name="idrol" Nullable="false" />
+        <ComplexType Name="sp_login_Result">
+          <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="id_perfil" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="45" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -182,52 +931,192 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EventoDeportivoCibertecModelStoreContainer" CdmEntityContainer="EventoDeportivoCibertecEntities">
-          <EntitySetMapping Name="enlace">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.enlace">
-              <MappingFragment StoreEntitySet="enlace">
-                <ScalarProperty Name="idenlace" ColumnName="idenlace" />
+          <EntitySetMapping Name="sedes">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.sede">
+              <MappingFragment StoreEntitySet="sede">
+                <ScalarProperty Name="id_Sede" ColumnName="id_Sede" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_categoria">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_categoria">
+              <MappingFragment StoreEntitySet="tb_categoria">
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="ruta" ColumnName="ruta" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="rol">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.rol">
-              <MappingFragment StoreEntitySet="rol">
-                <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <EntitySetMapping Name="tb_Club">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_Club">
+              <MappingFragment StoreEntitySet="tb_Club">
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+                <ScalarProperty Name="Nombre_Club" ColumnName="Nombre_Club" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_comprobante_pago">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_comprobante_pago">
+              <MappingFragment StoreEntitySet="tb_comprobante_pago">
+                <ScalarProperty Name="id_comprobante_pago" ColumnName="id_comprobante_pago" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="num_ficha" ColumnName="num_ficha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_detalle_modalidad">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_detalle_modalidad">
+              <MappingFragment StoreEntitySet="tb_detalle_modalidad">
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_modalidad" ColumnName="id_modalidad" />
+                <ScalarProperty Name="num_hombres" ColumnName="num_hombres" />
+                <ScalarProperty Name="num_mujeres" ColumnName="num_mujeres" />
+                <ScalarProperty Name="cant_max_equipos" ColumnName="cant_max_equipos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_detalle_participante">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_detalle_participante">
+              <MappingFragment StoreEntitySet="tb_detalle_participante">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_disciplina">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_disciplina">
+              <MappingFragment StoreEntitySet="tb_disciplina">
+                <ScalarProperty Name="id_disciplina" ColumnName="id_disciplina" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="idenlace" ColumnName="idenlace" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usuario">
-            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.usuario">
-              <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="idrol" ColumnName="idrol" />
+          <EntitySetMapping Name="tb_equipo">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_equipo">
+              <MappingFragment StoreEntitySet="tb_equipo">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fec_reg" ColumnName="fec_reg" />
+                <ScalarProperty Name="color_uniforme" ColumnName="color_uniforme" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_BuscaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_BuscaUsuario">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_BuscaUsuario_Result">
-                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <EntitySetMapping Name="tb_evento">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_evento">
+              <MappingFragment StoreEntitySet="tb_evento">
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="nombre_evento" ColumnName="nombre_evento" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_final" ColumnName="fecha_final" />
+                <ScalarProperty Name="idSede" ColumnName="idSede" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_in_inscripcion" ColumnName="fecha_in_inscripcion" />
+                <ScalarProperty Name="fecha_fin_inscripcion" ColumnName="fecha_fin_inscripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ficha_inscripcion">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_ficha_inscripcion">
+              <MappingFragment StoreEntitySet="tb_ficha_inscripcion">
+                <ScalarProperty Name="num_ficha" ColumnName="num_ficha" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+                <ScalarProperty Name="id_modalidad" ColumnName="id_modalidad" />
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_menu">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_menu">
+              <MappingFragment StoreEntitySet="tb_menu">
+                <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+                <ScalarProperty Name="descripcionMenu" ColumnName="descripcionMenu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_modalidad">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_modalidad">
+              <MappingFragment StoreEntitySet="tb_modalidad">
+                <ScalarProperty Name="id_modalidad" ColumnName="id_modalidad" />
+                <ScalarProperty Name="id_disciplina" ColumnName="id_disciplina" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_participante">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_participante">
+              <MappingFragment StoreEntitySet="tb_participante">
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="fec_nacimiento" ColumnName="fec_nacimiento" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="valoracion" ColumnName="valoracion" />
+                <ScalarProperty Name="idClub" ColumnName="idClub" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Perfil">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_Perfil">
+              <MappingFragment StoreEntitySet="tb_Perfil">
+                <ScalarProperty Name="id_Perfil" ColumnName="id_Perfil" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_subMenu">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_subMenu">
+              <MappingFragment StoreEntitySet="tb_subMenu">
+                <ScalarProperty Name="id_subMenu" ColumnName="id_subMenu" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_usuario">
+            <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.tb_usuario">
+              <MappingFragment StoreEntitySet="tb_usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="idrol" ColumnName="idrol" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id_Perfil" ColumnName="id_Perfil" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tb_Acceso" TypeName="EventoDeportivoCibertecModel.tb_Acceso" StoreEntitySet="tb_Acceso">
+            <EndProperty Name="tb_Perfil">
+              <ScalarProperty Name="id_Perfil" ColumnName="id_Perfil" />
+            </EndProperty>
+            <EndProperty Name="tb_subMenu">
+              <ScalarProperty Name="id_subMenu" ColumnName="id_subMenu" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="sp_BuscaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_BuscaUsuario" />
           <FunctionImportMapping FunctionImportName="sp_EliminaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_EliminaUsuario" />
-          <FunctionImportMapping FunctionImportName="sp_listaUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaUsuarios">
+          <FunctionImportMapping FunctionImportName="sp_listaUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaUsuarios" />
+          <FunctionImportMapping FunctionImportName="sp_login" FunctionName="EventoDeportivoCibertecModel.Store.sp_login">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_listaUsuarios_Result">
-                <ScalarProperty Name="idusuario" ColumnName="idusuario" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="idrol" ColumnName="idrol" />
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_login_Result">
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -246,7 +1135,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

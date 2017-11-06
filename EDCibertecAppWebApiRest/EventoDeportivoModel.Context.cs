@@ -27,17 +27,30 @@ namespace EDCibertecAppWebApiRest
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<enlace> enlace { get; set; }
-        public virtual DbSet<rol> rol { get; set; }
-        public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<sede> sedes { get; set; }
+        public virtual DbSet<tb_categoria> tb_categoria { get; set; }
+        public virtual DbSet<tb_Club> tb_Club { get; set; }
+        public virtual DbSet<tb_comprobante_pago> tb_comprobante_pago { get; set; }
+        public virtual DbSet<tb_detalle_modalidad> tb_detalle_modalidad { get; set; }
+        public virtual DbSet<tb_detalle_participante> tb_detalle_participante { get; set; }
+        public virtual DbSet<tb_disciplina> tb_disciplina { get; set; }
+        public virtual DbSet<tb_equipo> tb_equipo { get; set; }
+        public virtual DbSet<tb_evento> tb_evento { get; set; }
+        public virtual DbSet<tb_ficha_inscripcion> tb_ficha_inscripcion { get; set; }
+        public virtual DbSet<tb_menu> tb_menu { get; set; }
+        public virtual DbSet<tb_modalidad> tb_modalidad { get; set; }
+        public virtual DbSet<tb_participante> tb_participante { get; set; }
+        public virtual DbSet<tb_Perfil> tb_Perfil { get; set; }
+        public virtual DbSet<tb_subMenu> tb_subMenu { get; set; }
+        public virtual DbSet<tb_usuario> tb_usuario { get; set; }
     
-        public virtual ObjectResult<sp_BuscaUsuario_Result> sp_BuscaUsuario(Nullable<int> id)
+        public virtual int sp_BuscaUsuario(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_BuscaUsuario_Result>("sp_BuscaUsuario", idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_BuscaUsuario", idParameter);
         }
     
         public virtual int sp_EliminaUsuario(Nullable<int> id)
@@ -49,9 +62,22 @@ namespace EDCibertecAppWebApiRest
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EliminaUsuario", idParameter);
         }
     
-        public virtual ObjectResult<sp_listaUsuarios_Result> sp_listaUsuarios()
+        public virtual int sp_listaUsuarios()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listaUsuarios_Result>("sp_listaUsuarios");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_listaUsuarios");
+        }
+    
+        public virtual ObjectResult<sp_login_Result> sp_login(string login, string clave)
+        {
+            var loginParameter = login != null ?
+                new ObjectParameter("login", login) :
+                new ObjectParameter("login", typeof(string));
+    
+            var claveParameter = clave != null ?
+                new ObjectParameter("clave", clave) :
+                new ObjectParameter("clave", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_login_Result>("sp_login", loginParameter, claveParameter);
         }
     
         public virtual int sp_RegistrarUsuarios(Nullable<int> id, string login, string contraseña, Nullable<int> idrol)

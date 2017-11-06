@@ -12,19 +12,26 @@ namespace EDCibertecAppWebApiRest
     using System;
     using System.Collections.Generic;
     
-    public partial class enlace
+    public partial class tb_evento
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public enlace()
+        public tb_evento()
         {
-            this.rol = new HashSet<rol>();
+            this.tb_detalle_modalidad = new HashSet<tb_detalle_modalidad>();
         }
     
-        public int idenlace { get; set; }
-        public string descripcion { get; set; }
-        public string ruta { get; set; }
+        public int idEvento { get; set; }
+        public string nombre_evento { get; set; }
+        public System.DateTime fecha_inicio { get; set; }
+        public System.DateTime fecha_final { get; set; }
+        public int idSede { get; set; }
+        public string lugar { get; set; }
+        public string estado { get; set; }
+        public Nullable<System.DateTime> fecha_in_inscripcion { get; set; }
+        public Nullable<System.DateTime> fecha_fin_inscripcion { get; set; }
     
+        public virtual sede sede { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rol> rol { get; set; }
+        public virtual ICollection<tb_detalle_modalidad> tb_detalle_modalidad { get; set; }
     }
 }

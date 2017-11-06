@@ -1,50 +1,63 @@
-﻿using System;
+﻿using EDCibertecAppWebApiRest.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using EDCibertecAppWebApiRest.Models;
+
 
 namespace EDCibertecAppWebApiRest.Controllers
 {
+
+    [RoutePrefix("Api")]
+
     public class UsuarioController : ApiController
     {
         EventoDeportivoCibertecEntities db = new EventoDeportivoCibertecEntities();
-        [HttpGet]
 
-        public List<Usuario> GetUsuarios()
+      /* [HttpGet]
+        public IHttpActionResult GetUsuarios()
         {
-            var consulta = (from s in db.sp_listaUsuarios()
+            var consulta = from s in db.sp_listaUsuarios()
                             select new Usuario
                             {
-                                idusuario = s.idusuario,
-                                login = s.login,
-                                contraseña = s.contraseña,
-                                idrol = s.idrol,
+                              nombres 
 
-                            }).ToList();
+                            };
 
-            return consulta;
+            return Ok(consulta);
         }
+        */
 
-        [HttpPost]
-
-        public string PostBuscaUsuario(int id)
+        [HttpGet]
+        [Route("usuariologin")]
+        public IHttpActionResult GetUsuario(string usuario , string clave)
         {
             try
             {
-                var query = db.sp_BuscaUsuario(id);
+                var query = from u in db.sp_login(usuario, clave)
 
-                return query.ToString();
+                            select new Usuario()
+                            {
+                                nombres = u.nombres,
+                                apellidos = u.apellidos,
+                                id_perfil = u.id_perfil,
+                                descripcion = u.descripcion
+                            };
+
+                return Ok(query.FirstOrDefault());
+                    //query.FirstOrDefault();
 
             }
             catch (Exception ex)
             {
-                return BadRequest().ToString();
+                return null;
             }
+
         }
 
+        /*
         [HttpPost]
 
         public string PostRegistroUsuario(int id, string login, string contraseña, int idrol)

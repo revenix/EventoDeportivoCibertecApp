@@ -37,11 +37,11 @@ namespace EventoDeportivoCibertecApp.droid
             txtidrol = FindViewById<EditText>(Resource.Id.txtIdRol);
             btnRegistrar = FindViewById<Button>(Resource.Id.btnRegistrarUsuario);
 
-            btnRegistrar.Click += BtnRegistrar_Click;
+           // btnRegistrar.Click += BtnRegistrar_Click;
 
         }
 
-        private async void BtnRegistrar_Click(object sender, EventArgs e)
+       /* private async void BtnRegistrar_Click(object sender, EventArgs e)
         {
             string respuesta;
 
@@ -53,7 +53,7 @@ namespace EventoDeportivoCibertecApp.droid
               var  contraseña = txtContraseña.Text;
                var idrol = int.Parse(txtidrol.Text);
                
-                respuesta = await controller.RegistrarUsuario(idusuario , login, contraseña, idrol);
+             //   respuesta = await controller.RegistrarUsuario(idusuario , login, contraseña, idrol);
 
                 //Llamamos a nuestro activity Principal (La vieja confiable)
                 StartActivity(typeof(MainActivity));
@@ -66,5 +66,6 @@ namespace EventoDeportivoCibertecApp.droid
 
             Toast.MakeText(this, respuesta, ToastLength.Long).Show();
         }
+        */
     }
 }

@@ -12,13 +12,18 @@ namespace EDCibertecAppWebApiRest
     using System;
     using System.Collections.Generic;
     
-    public partial class usuario
+    public partial class tb_menu
     {
-        public int idusuario { get; set; }
-        public string login { get; set; }
-        public string contraseña { get; set; }
-        public int idrol { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_menu()
+        {
+            this.tb_subMenu = new HashSet<tb_subMenu>();
+        }
     
-        public virtual rol rol { get; set; }
+        public int id_menu { get; set; }
+        public string descripcionMenu { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_subMenu> tb_subMenu { get; set; }
     }
 }

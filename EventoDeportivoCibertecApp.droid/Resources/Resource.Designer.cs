@@ -26,6 +26,9 @@ namespace EventoDeportivoCibertecApp.droid
 		
 		public static void UpdateIdValues()
 		{
+			global::ZXing.Mobile.Resource.Id.contentFrame = global::EventoDeportivoCibertecApp.droid.Resource.Id.contentFrame;
+			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::EventoDeportivoCibertecApp.droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::EventoDeportivoCibertecApp.droid.Resource.Layout.zxingscannerfragmentlayout;
 		}
 		
 		public partial class Attribute
@@ -93,6 +96,9 @@ namespace EventoDeportivoCibertecApp.droid
 			// aapt resource value: 0x7f05000c
 			public const int btnRegistrarUsuario = 2131034124;
 			
+			// aapt resource value: 0x7f05000d
+			public const int contentFrame = 2131034125;
+			
 			// aapt resource value: 0x7f050007
 			public const int listUsuarios = 2131034119;
 			
@@ -138,6 +144,12 @@ namespace EventoDeportivoCibertecApp.droid
 			
 			// aapt resource value: 0x7f030002
 			public const int Registro = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int zxingscanneractivitylayout = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int zxingscannerfragmentlayout = 2130903044;
 			
 			static Layout()
 			{
