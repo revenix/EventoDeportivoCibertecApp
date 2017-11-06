@@ -47,6 +47,7 @@ namespace EventoDeportivoCibertecApp.droid
             {
                 nombres.Text = dato.nombres + " " + dato.apellidos;
                 sexo.Text = dato.sexo;
+                rating.Rating =int.Parse(dato.valoracion);
                // rating.NumStars =int.Parse(dato.valoracion);
                 equipo.Text = dato.nombre;
             }

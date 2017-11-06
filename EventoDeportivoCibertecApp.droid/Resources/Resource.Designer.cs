@@ -72,16 +72,22 @@ namespace EventoDeportivoCibertecApp.droid
 			public const int Icon = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int img = 2130837512;
+			public const int icon_campeonato = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int login = 2130837513;
+			public const int icon_evento = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int mujer = 2130837514;
+			public const int img = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int password = 2130837515;
+			public const int login = 2130837515;
+			
+			// aapt resource value: 0x7f02000c
+			public const int mujer = 2130837516;
+			
+			// aapt resource value: 0x7f02000d
+			public const int password = 2130837517;
 			
 			static Drawable()
 			{

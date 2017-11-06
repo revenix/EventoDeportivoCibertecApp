@@ -13,7 +13,7 @@ using EventoDeportivoCibertecApp.portable;
 
 namespace EventoDeportivoCibertecApp.droid
 {
-    [Activity(Label = "Login", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Evento Deportivo", MainLauncher = true, Icon = "@drawable/icon_campeonato")]
     public class Login : Activity
     {
         EditText txtlogin;
@@ -22,10 +22,8 @@ namespace EventoDeportivoCibertecApp.droid
         Services controller = new Services();
         protected override void OnCreate(Bundle savedInstanceState)
         {
-
+            Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnCreate(savedInstanceState);
-          Window.RequestFeature(WindowFeatures.NoTitle);
-
             SetContentView(Resource.Layout.Login);
 
              txtlogin = FindViewById<EditText>(Resource.Id.txtlogin);
