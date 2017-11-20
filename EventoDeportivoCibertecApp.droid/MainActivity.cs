@@ -11,22 +11,46 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Views;
 
+using Android.Support.V7.App;
+using Android.Support.V4.Widget;
+using V7Toolbar = Android.Support.V7.Widget.Toolbar;
+using Android.Support.Design.Widget;
+
+
 namespace EventoDeportivoCibertecApp.droid
 {
-    [Activity(Label = "EventoDeportivoCibertecApp.droid")]
-    public class MainActivity : Activity
+   [Activity(Theme = "@style/Theme.DesignDemo")]  
+
+    public class MainActivity : AppCompatActivity
     {
         
         Button btnRegistrar;
         ListView listEvento;
         Services controller = new Services();
         Usuario usuario = new Usuario();
+        DrawerLayout drawerLayout;
+        NavigationView navigationView;
 
         protected  override async void OnCreate(Bundle bundle)
         {
             Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
           SetContentView (Resource.Layout.Main);
+
+            //starMenu
+             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            // Create ActionBarDrawerToggle button and add it to the toolbar  
+            var toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
+            
+            SetSupportActionBar(toolbar);
+            var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.drawer_open, Resource.String.drawer_close);
+            drawerLayout.SetDrawerListener(drawerToggle);
+            drawerToggle.SyncState();
+               navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            setupDrawerContent(navigationView); //Calling Function  
+            //MenuEnd
+
+
             //inicia el qr
             MobileBarcodeScanner.Initialize(Application);
             //termina qr
@@ -43,6 +67,23 @@ namespace EventoDeportivoCibertecApp.droid
             await GetEventos();
             
         }
+
+        //menu voids
+        void setupDrawerContent(NavigationView navigationView)
+        {
+            navigationView.NavigationItemSelected += (sender, e) =>
+            {
+                e.MenuItem.SetChecked(true);
+                drawerLayout.CloseDrawers();
+            };
+        }
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+             navigationView.InflateMenu(Resource.Menu.nav_menu); //Navigation Drawer Layout Menu Creation  
+            return true;
+        }
+        //end Menu Void
+
 
         private async void BtnRegistrar_Click(object sender, EventArgs e)
         {
