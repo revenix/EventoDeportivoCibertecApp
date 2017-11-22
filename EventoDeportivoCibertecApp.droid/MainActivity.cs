@@ -21,24 +21,24 @@ namespace EventoDeportivoCibertecApp.droid
 {
    [Activity(Theme = "@style/Theme.DesignDemo")]  
 
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : Activity //AppCompatActivity
     {
         
         Button btnRegistrar;
         ListView listEvento;
         Services controller = new Services();
         Usuario usuario = new Usuario();
-        DrawerLayout drawerLayout;
-        NavigationView navigationView;
+       // DrawerLayout drawerLayout;
+      //  NavigationView navigationView;
 
         protected  override async void OnCreate(Bundle bundle)
         {
             Window.RequestFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
           SetContentView (Resource.Layout.Main);
-
+            /*
             //starMenu
-             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
             // Create ActionBarDrawerToggle button and add it to the toolbar  
             var toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
             
@@ -49,7 +49,7 @@ namespace EventoDeportivoCibertecApp.droid
                navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             setupDrawerContent(navigationView); //Calling Function  
             //MenuEnd
-
+            */
 
             //inicia el qr
             MobileBarcodeScanner.Initialize(Application);
@@ -67,7 +67,7 @@ namespace EventoDeportivoCibertecApp.droid
             await GetEventos();
             
         }
-
+        /*
         //menu voids
         void setupDrawerContent(NavigationView navigationView)
         {
@@ -83,7 +83,7 @@ namespace EventoDeportivoCibertecApp.droid
             return true;
         }
         //end Menu Void
-
+            */
 
         private async void BtnRegistrar_Click(object sender, EventArgs e)
         {
