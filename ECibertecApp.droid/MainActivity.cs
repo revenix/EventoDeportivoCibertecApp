@@ -112,7 +112,7 @@ namespace ECibertecApp.droid
             //tabs agregar tabs 
             TabAdapter adapter = new TabAdapter(SupportFragmentManager);
             adapter.AddFragment(new Fragment1(), "Eventos");
-            adapter.AddFragment(new Fragment2(), "Fragment 2");
+            adapter.AddFragment(new Fragment2(), "Participantes");
             adapter.AddFragment(new Fragment3(), "Fragment 3");
 
             viewPager.Adapter = adapter;

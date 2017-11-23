@@ -11,11 +11,16 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using SupportFragment = Android.Support.V4.App.Fragment;
+using EventoDeportivoCibertecApp.portable;
+using System.Threading.Tasks;
 
 namespace ECibertecApp.droid.Fragments
 {
     public class Fragment2 : SupportFragment
     {
+        Services controller = new Services();
+        ListView listParticipante;
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,10 +30,40 @@ namespace ECibertecApp.droid.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.fragment2, container, false);
+            View view = inflater.Inflate(Resource.Layout.fragment2, container, false);
 
-           //return base.OnCreateView(inflater, container, savedInstanceState);
+            listParticipante = view.FindViewById<ListView>(Resource.Id.listParticipante);
+            //evento sin await
+
+            GetParticipante();
+
+            //evento sin await
+
+            return view;
+        }
+
+        private async Task GetParticipante()
+        {
+            try
+            {
+                var dato = await controller.ListParticipantes();
+
+                listParticipante.ItemClick += ListEvento_ItemClick;
+
+                listParticipante.Adapter = new ParticipanteAdapter(this.Activity, dato);
+            }
+            catch (Exception e)
+            {
+                //this.context
+                Toast.MakeText(this.Activity, e.ToString(), ToastLength.Long).Show();
+            }
+        }
+
+        private void ListEvento_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+
+            Toast.MakeText(this.Activity , "action", ToastLength.Long).Show();
+
         }
     }
 }
