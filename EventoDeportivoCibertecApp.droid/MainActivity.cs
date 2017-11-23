@@ -101,6 +101,7 @@ namespace EventoDeportivoCibertecApp.droid
 
                 Toast.MakeText(this, result.Text, ToastLength.Long).Show();
             }
+            //lector de QR
 
 
         }

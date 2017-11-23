@@ -13,6 +13,8 @@ using Android.Support.V4.App;
 using System.Collections.Generic;
 using Java.Lang;
 using ECibertecApp.droid.Fragments;
+using ZXing.Mobile;
+using Android.Widget;
 
 namespace ECibertecApp.droid
 {
@@ -20,16 +22,27 @@ namespace ECibertecApp.droid
     public class MainActivity : AppCompatActivity //cambiar a AppCompatActivity para usar el SetSupportActionBar,SupportActionBar
     {
         private DrawerLayout mDrawerLayout;
-
+        TextView txtusuario;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Window.RequestFeature(WindowFeatures.NoTitle);
+
             base.OnCreate(savedInstanceState);
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-
+            //inicia el qr
+            MobileBarcodeScanner.Initialize(Application);
+            //termina qr
+            
+           /* //envio el usuario
+            txtusuario = FindViewById<EditText>(Resource.Id.txtUsuario);
+            string nombre = Intent.GetStringExtra("nombreparticipante");
+            txtusuario.Text = nombre;
+            //envio el usuario
+            */
 
 
 
@@ -38,7 +51,7 @@ namespace ECibertecApp.droid
             SetSupportActionBar(toolBar);
 
             SupportActionBar ab = SupportActionBar;
-            ab.SetHomeAsUpIndicator(Resource.Drawable.login);
+            ab.SetHomeAsUpIndicator(Resource.Drawable.ic_menu);
             ab.SetDisplayHomeAsUpEnabled(true);
 
             mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
@@ -63,12 +76,28 @@ namespace ECibertecApp.droid
             {
                 View anchor = o as View;
 
-                Snackbar.Make(anchor, "Yay Snackbar!!", Snackbar.LengthLong)
-                        .SetAction("Action", v =>
+                Snackbar.Make(anchor, "QR de Participante", Snackbar.LengthLong)
+                        .SetAction("Buscar", async v =>
                         {
                             //Do something here
                             //Intent intent = new Intent(fab.Context, typeof(MainActivity /*BottomSheetActivity*/ ));//agregar algun activiti a mostrar
                             //  StartActivity(intent);
+
+                            //lector de QR
+                            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+                            var result = await scanner.Scan();
+
+                            if (result != null)
+                            {
+                              // var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+
+                               // activity2.PutExtra("idparticipante", result.Text);
+
+                              //  StartActivity(activity2);
+
+                                Toast.MakeText(this, result.Text, ToastLength.Long).Show();
+                            }
+                            //lector de QR
                         })
                         .Show();
             };
@@ -82,7 +111,7 @@ namespace ECibertecApp.droid
 
             //tabs agregar tabs 
             TabAdapter adapter = new TabAdapter(SupportFragmentManager);
-            adapter.AddFragment(new Fragment1(), "Fragment 1");
+            adapter.AddFragment(new Fragment1(), "Eventos");
             adapter.AddFragment(new Fragment2(), "Fragment 2");
             adapter.AddFragment(new Fragment3(), "Fragment 3");
 

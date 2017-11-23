@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using System;
 using EventoDeportivoCibertecApp.portable;
+using Android.Content;
 
 namespace ECibertecApp.droid
 {
@@ -51,12 +52,19 @@ namespace ECibertecApp.droid
                     if (tipoUsuario.Equals("Administrador"))
                     {
                         Toast.MakeText(this, "Bienvenido " + dato.nombres, ToastLength.Short).Show();
-                        StartActivity(typeof(MainActivity));
+
+                        var activity2 = new Intent(this, typeof(MainActivity));
+                       // activity2.PutExtra("nombreparticipante", dato.nombres);
+
+                        StartActivity(activity2);
                     }
                     else
                     {
                         Toast.MakeText(this, "Bienvenido  " + dato.nombres, ToastLength.Short).Show();
-                        StartActivity(typeof(MainActivity));
+                        var activity2 = new Intent(this, typeof(MainActivity));
+                       // activity2.PutExtra("nombreparticipante", dato.nombres);
+
+                        StartActivity(activity2);
                     }
                 }
                 else
