@@ -51,6 +51,17 @@ namespace EventoDeportivoCibertecApp.portable
             return evento;
 
         }
+        public async Task<List<Participantelista>> ListParticipantes()
+        {
+            var par = $"listaparticipantes";
+
+            var uri = url + par;
+            var respuestaService = await http.GetAsync(uri);
+            var contenido = respuestaService.Content.ReadAsStringAsync().Result.ToString();
+            var evento = JsonConvert.DeserializeObject<List<Participantelista>>(contenido);
+            return evento;
+
+        }
 
         public async Task<List< Modalidad>> ListaModalidad (int id)
         {

@@ -14,6 +14,7 @@ namespace EDCibertecAppWebApiRest.Controllers
     {
 
         EventoDeportivoCibertecEntities db = new EventoDeportivoCibertecEntities();
+
         [HttpGet]
         [Route("listaeventos")]
         public IHttpActionResult GetEvento()

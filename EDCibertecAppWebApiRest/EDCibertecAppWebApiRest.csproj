@@ -232,6 +232,9 @@
     <Compile Include="sp_ListarEventos_Result.cs">
       <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_listarparticipantes_Result.cs">
+      <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_login_Result.cs">
       <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
     </Compile>

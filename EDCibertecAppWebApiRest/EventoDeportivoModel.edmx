@@ -378,6 +378,7 @@
         </Function>
         <Function Name="sp_ListarDisciplinas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_ListarEventos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_listarparticipantes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_listaUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="login" Type="char" Mode="In" />
@@ -839,7 +840,7 @@
           <End Role="tb_subMenu" Type="Self.tb_subMenu" Multiplicity="*" />
         </Association>
         <EntityContainer Name="EventoDeportivoCibertecEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sedes" EntityType="Self.sede" />
+          <EntitySet Name="sede" EntityType="Self.sede" />
           <EntitySet Name="tb_categoria" EntityType="Self.tb_categoria" />
           <EntitySet Name="tb_Club" EntityType="Self.tb_Club" />
           <EntitySet Name="tb_comprobante_pago" EntityType="Self.tb_comprobante_pago" />
@@ -856,7 +857,7 @@
           <EntitySet Name="tb_subMenu" EntityType="Self.tb_subMenu" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
           <AssociationSet Name="fk_tb_evento_sede" Association="Self.fk_tb_evento_sede">
-            <End Role="sede" EntitySet="sedes" />
+            <End Role="sede" EntitySet="sede" />
             <End Role="tb_evento" EntitySet="tb_evento" />
           </AssociationSet>
           <AssociationSet Name="fk_tb_modalidad_tb_categoria1" Association="Self.fk_tb_modalidad_tb_categoria1">
@@ -932,6 +933,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_ListarDisciplinas" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarDisciplinas_Result)" />
           <FunctionImport Name="sp_ListarEventos" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarEventos_Result)" />
+          <FunctionImport Name="sp_listarparticipantes" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listarparticipantes_Result)" />
           <FunctionImport Name="sp_listaUsuarios" />
           <FunctionImport Name="sp_login" ReturnType="Collection(EventoDeportivoCibertecModel.sp_login_Result)">
             <Parameter Name="login" Mode="In" Type="String" />
@@ -977,6 +979,14 @@
           <Property Type="String" Name="lugar" Nullable="false" MaxLength="45" />
           <Property Type="DateTime" Name="fecha_inicio" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_listarparticipantes_Result">
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="puesto" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="id_participante" Nullable="false" />
+          <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="valoracion" Nullable="true" MaxLength="2" />
+        </ComplexType>
         <ComplexType Name="sp_login_Result">
           <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
           <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
@@ -997,7 +1007,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EventoDeportivoCibertecModelStoreContainer" CdmEntityContainer="EventoDeportivoCibertecEntities">
-          <EntitySetMapping Name="sedes">
+          <EntitySetMapping Name="sede">
             <EntityTypeMapping TypeName="EventoDeportivoCibertecModel.sede">
               <MappingFragment StoreEntitySet="sede">
                 <ScalarProperty Name="id_Sede" ColumnName="id_Sede" />
@@ -1225,6 +1235,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_listarparticipantes" FunctionName="EventoDeportivoCibertecModel.Store.sp_listarparticipantes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_listarparticipantes_Result">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="valoracion" ColumnName="valoracion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_listaUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaUsuarios" />
           <FunctionImportMapping FunctionImportName="sp_login" FunctionName="EventoDeportivoCibertecModel.Store.sp_login">
             <ResultMapping>
@@ -1263,7 +1285,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

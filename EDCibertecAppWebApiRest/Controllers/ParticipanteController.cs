@@ -72,5 +72,37 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
 
         }
+
+
+        [HttpGet]
+        [Route("listaparticipantes")]
+        public IHttpActionResult GetParticipante()
+        {
+            try
+            {
+                var query = from s in db.sp_listarparticipantes()
+
+                            select new Participantelista()
+                            {
+                                nombre = s.nombre,
+                                puesto = s.puesto,
+                                id_participante = s.id_participante,
+                                nombres = s.nombres,
+                                apellidos = s.apellidos,
+                                valoracion = s.valoracion
+
+                            };
+
+                return Ok(query.ToList());
+                //query.FirstOrDefault();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
     }
 }

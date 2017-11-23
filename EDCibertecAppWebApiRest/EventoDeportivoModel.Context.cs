@@ -27,7 +27,7 @@ namespace EDCibertecAppWebApiRest
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<sede> sedes { get; set; }
+        public virtual DbSet<sede> sede { get; set; }
         public virtual DbSet<tb_categoria> tb_categoria { get; set; }
         public virtual DbSet<tb_Club> tb_Club { get; set; }
         public virtual DbSet<tb_comprobante_pago> tb_comprobante_pago { get; set; }
@@ -97,6 +97,11 @@ namespace EDCibertecAppWebApiRest
         public virtual ObjectResult<sp_ListarEventos_Result> sp_ListarEventos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ListarEventos_Result>("sp_ListarEventos");
+        }
+    
+        public virtual ObjectResult<sp_listarparticipantes_Result> sp_listarparticipantes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listarparticipantes_Result>("sp_listarparticipantes");
         }
     
         public virtual int sp_listaUsuarios()
