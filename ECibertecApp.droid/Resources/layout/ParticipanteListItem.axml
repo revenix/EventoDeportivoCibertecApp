@@ -5,6 +5,7 @@
     android:background="@drawable/nav_1"
     android:layout_width="match_parent"
     android:layout_height="120dp">
+  
     <refractored.controls.CircleImageView
         android:id="@+id/avatar"
         android:layout_width="@dimen/list_item_avatar_size"

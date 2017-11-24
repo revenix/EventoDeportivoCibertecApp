@@ -15,6 +15,7 @@ using Java.Lang;
 using ECibertecApp.droid.Fragments;
 using ZXing.Mobile;
 using Android.Widget;
+using Android.Content;
 
 namespace ECibertecApp.droid
 {
@@ -77,7 +78,7 @@ namespace ECibertecApp.droid
                 View anchor = o as View;
 
                 Snackbar.Make(anchor, "QR de Participante", Snackbar.LengthLong)
-                        .SetAction("Buscar", async v =>
+                        .SetAction("SCAN", async v =>
                         {
                             //Do something here
                             //Intent intent = new Intent(fab.Context, typeof(MainActivity /*BottomSheetActivity*/ ));//agregar algun activiti a mostrar
@@ -89,13 +90,19 @@ namespace ECibertecApp.droid
 
                             if (result != null)
                             {
-                              // var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+                                var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+                                activity2.PutExtra("idparticipante", result.Text);
 
-                               // activity2.PutExtra("idparticipante", result.Text);
+                                StartActivity(activity2);
+                                // activity2.PutExtra("idparticipante", result.Text);
 
-                              //  StartActivity(activity2);
+                                //  StartActivity(activity2);
 
-                                Toast.MakeText(this, result.Text, ToastLength.Long).Show();
+                                //Toast.MakeText(this, result.Text, ToastLength.Long).Show();
+                            }
+                            else
+                            {
+                               Toast.MakeText(this, "Participante no encontrado", ToastLength.Long).Show();
                             }
                             //lector de QR
                         })
