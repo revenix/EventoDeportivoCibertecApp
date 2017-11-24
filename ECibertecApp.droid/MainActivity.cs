@@ -128,7 +128,7 @@ namespace ECibertecApp.droid
             viewPager.Adapter = adapter;
         }
 
-        //Evento de botones del Menu
+       
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -140,16 +140,37 @@ namespace ECibertecApp.droid
                     return base.OnOptionsItemSelected(item);
             }
         }
-        //Evento de botones del Menu
 
+        //Evento de botones del Menu
         private void SetUpDrawerContent(NavigationView navigationView)
         {
             navigationView.NavigationItemSelected += (object sender, NavigationView.NavigationItemSelectedEventArgs e) =>
             {
+                var med = FindViewById<TextView>(Resource.Id.txtUsuario);
+                med.Text = "salio";
+
+                //menu option
+                switch (e.MenuItem.ItemId)
+                {
+                    case Resource.Id.nav_equipo:
+                        Toast.MakeText(this, "nav equipo", ToastLength.Short).Show();
+                        break;
+                    case Resource.Id.nav_perfil:
+                        Toast.MakeText(this, "nav perfil", ToastLength.Short).Show();
+                        break;
+
+                    default:
+                        Toast.MakeText(this, "default", ToastLength.Short).Show();
+
+                        break;
+                }
+                //menu option
+
                 e.MenuItem.SetChecked(true);
                 mDrawerLayout.CloseDrawers();
             };
         }
+        //Evento de botones del Menu
     }
 
 

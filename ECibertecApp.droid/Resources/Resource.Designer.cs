@@ -2399,8 +2399,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080036
 			public const int SYM = 2131230774;
 			
-			// aapt resource value: 0x7f0800b2
-			public const int action0 = 2131230898;
+			// aapt resource value: 0x7f0800b3
+			public const int action0 = 2131230899;
 			
 			// aapt resource value: 0x7f08007b
 			public const int action_bar = 2131230843;
@@ -2423,17 +2423,17 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080059
 			public const int action_bar_title = 2131230809;
 			
-			// aapt resource value: 0x7f0800af
-			public const int action_container = 2131230895;
+			// aapt resource value: 0x7f0800b0
+			public const int action_container = 2131230896;
 			
 			// aapt resource value: 0x7f08007c
 			public const int action_context_bar = 2131230844;
 			
-			// aapt resource value: 0x7f0800b6
-			public const int action_divider = 2131230902;
+			// aapt resource value: 0x7f0800b7
+			public const int action_divider = 2131230903;
 			
-			// aapt resource value: 0x7f0800b0
-			public const int action_image = 2131230896;
+			// aapt resource value: 0x7f0800b1
+			public const int action_image = 2131230897;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -2450,11 +2450,11 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08005b
 			public const int action_mode_close_button = 2131230811;
 			
-			// aapt resource value: 0x7f0800b1
-			public const int action_text = 2131230897;
+			// aapt resource value: 0x7f0800b2
+			public const int action_text = 2131230898;
 			
-			// aapt resource value: 0x7f0800bf
-			public const int actions = 2131230911;
+			// aapt resource value: 0x7f0800c0
+			public const int actions = 2131230912;
 			
 			// aapt resource value: 0x7f08005c
 			public const int activity_chooser_view_content = 2131230812;
@@ -2480,8 +2480,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080043
 			public const int auto = 2131230787;
 			
-			// aapt resource value: 0x7f0800ad
-			public const int avatar = 2131230893;
+			// aapt resource value: 0x7f0800ae
+			public const int avatar = 2131230894;
 			
 			// aapt resource value: 0x7f08002e
 			public const int beginning = 2131230766;
@@ -2492,14 +2492,17 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08003c
 			public const int bottom = 2131230780;
 			
-			// aapt resource value: 0x7f0800a9
-			public const int btnIngresar = 2131230889;
+			// aapt resource value: 0x7f0800a7
+			public const int btnAtras = 2131230887;
+			
+			// aapt resource value: 0x7f0800aa
+			public const int btnIngresar = 2131230890;
 			
 			// aapt resource value: 0x7f080062
 			public const int buttonPanel = 2131230818;
 			
-			// aapt resource value: 0x7f0800b3
-			public const int cancel_action = 2131230899;
+			// aapt resource value: 0x7f0800b4
+			public const int cancel_action = 2131230900;
 			
 			// aapt resource value: 0x7f080044
 			public const int center = 2131230788;
@@ -2513,8 +2516,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080072
 			public const int checkbox = 2131230834;
 			
-			// aapt resource value: 0x7f0800bb
-			public const int chronometer = 2131230907;
+			// aapt resource value: 0x7f0800bc
+			public const int chronometer = 2131230908;
 			
 			// aapt resource value: 0x7f08004d
 			public const int clip_horizontal = 2131230797;
@@ -2528,8 +2531,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08008c
 			public const int container = 2131230860;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int contentFrame = 2131230917;
+			// aapt resource value: 0x7f0800c6
+			public const int contentFrame = 2131230918;
 			
 			// aapt resource value: 0x7f080065
 			public const int contentPanel = 2131230821;
@@ -2567,8 +2570,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08001f
 			public const int disableHome = 2131230751;
 			
-			// aapt resource value: 0x7f0800aa
-			public const int drawer_layout = 2131230890;
+			// aapt resource value: 0x7f0800ab
+			public const int drawer_layout = 2131230891;
 			
 			// aapt resource value: 0x7f08007d
 			public const int edit_query = 2131230845;
@@ -2576,8 +2579,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08002f
 			public const int end = 2131230767;
 			
-			// aapt resource value: 0x7f0800c1
-			public const int end_padder = 2131230913;
+			// aapt resource value: 0x7f0800c2
+			public const int end_padder = 2131230914;
 			
 			// aapt resource value: 0x7f08003e
 			public const int enterAlways = 2131230782;
@@ -2624,8 +2627,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080061
 			public const int icon = 2131230817;
 			
-			// aapt resource value: 0x7f0800c0
-			public const int icon_group = 2131230912;
+			// aapt resource value: 0x7f0800c1
+			public const int icon_group = 2131230913;
 			
 			// aapt resource value: 0x7f080039
 			public const int ifRoom = 2131230777;
@@ -2636,11 +2639,11 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f0800a2
 			public const int imageView1 = 2131230882;
 			
-			// aapt resource value: 0x7f0800ac
-			public const int imgViewHeader = 2131230892;
+			// aapt resource value: 0x7f0800ad
+			public const int imgViewHeader = 2131230893;
 			
-			// aapt resource value: 0x7f0800bc
-			public const int info = 2131230908;
+			// aapt resource value: 0x7f0800bd
+			public const int info = 2131230909;
 			
 			// aapt resource value: 0x7f080058
 			public const int italic = 2131230808;
@@ -2672,17 +2675,17 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080060
 			public const int list_item = 2131230816;
 			
-			// aapt resource value: 0x7f0800ca
-			public const int logout = 2131230922;
+			// aapt resource value: 0x7f0800cb
+			public const int logout = 2131230923;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int masked = 2131230919;
+			// aapt resource value: 0x7f0800c8
+			public const int masked = 2131230920;
 			
-			// aapt resource value: 0x7f0800b5
-			public const int media_actions = 2131230901;
+			// aapt resource value: 0x7f0800b6
+			public const int media_actions = 2131230902;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int message = 2131230916;
+			// aapt resource value: 0x7f0800c5
+			public const int message = 2131230917;
 			
 			// aapt resource value: 0x7f080030
 			public const int middle = 2131230768;
@@ -2693,14 +2696,14 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080026
 			public const int multiply = 2131230758;
 			
+			// aapt resource value: 0x7f0800ca
+			public const int nav_equipo = 2131230922;
+			
 			// aapt resource value: 0x7f0800c9
-			public const int nav_equipo = 2131230921;
+			public const int nav_perfil = 2131230921;
 			
-			// aapt resource value: 0x7f0800c8
-			public const int nav_perfil = 2131230920;
-			
-			// aapt resource value: 0x7f0800ab
-			public const int nav_view = 2131230891;
+			// aapt resource value: 0x7f0800ac
+			public const int nav_view = 2131230892;
 			
 			// aapt resource value: 0x7f080092
 			public const int navigation_header_container = 2131230866;
@@ -2714,14 +2717,14 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08001d
 			public const int normal = 2131230749;
 			
-			// aapt resource value: 0x7f0800be
-			public const int notification_background = 2131230910;
+			// aapt resource value: 0x7f0800bf
+			public const int notification_background = 2131230911;
+			
+			// aapt resource value: 0x7f0800b9
+			public const int notification_main_column = 2131230905;
 			
 			// aapt resource value: 0x7f0800b8
-			public const int notification_main_column = 2131230904;
-			
-			// aapt resource value: 0x7f0800b7
-			public const int notification_main_column_container = 2131230903;
+			public const int notification_main_column_container = 2131230904;
 			
 			// aapt resource value: 0x7f08004b
 			public const int parallax = 2131230795;
@@ -2747,11 +2750,11 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080049
 			public const int right = 2131230793;
 			
-			// aapt resource value: 0x7f0800bd
-			public const int right_icon = 2131230909;
+			// aapt resource value: 0x7f0800be
+			public const int right_icon = 2131230910;
 			
-			// aapt resource value: 0x7f0800b9
-			public const int right_side = 2131230905;
+			// aapt resource value: 0x7f0800ba
+			public const int right_side = 2131230906;
 			
 			// aapt resource value: 0x7f08000c
 			public const int save_image_matrix = 2131230732;
@@ -2855,8 +2858,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08004a
 			public const int start = 2131230794;
 			
-			// aapt resource value: 0x7f0800b4
-			public const int status_bar_latest_event_content = 2131230900;
+			// aapt resource value: 0x7f0800b5
+			public const int status_bar_latest_event_content = 2131230901;
 			
 			// aapt resource value: 0x7f080075
 			public const int submenuarrow = 2131230837;
@@ -2891,8 +2894,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080015
 			public const int textinput_error = 2131230741;
 			
-			// aapt resource value: 0x7f0800ba
-			public const int time = 2131230906;
+			// aapt resource value: 0x7f0800bb
+			public const int time = 2131230907;
 			
 			// aapt resource value: 0x7f08001b
 			public const int title = 2131230747;
@@ -2936,14 +2939,14 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f0800a3
 			public const int txtNombres = 2131230883;
 			
-			// aapt resource value: 0x7f0800c2
-			public const int txtNombresApellidos = 2131230914;
+			// aapt resource value: 0x7f0800c3
+			public const int txtNombresApellidos = 2131230915;
 			
 			// aapt resource value: 0x7f080099
 			public const int txtSedeEvento = 2131230873;
 			
-			// aapt resource value: 0x7f0800ae
-			public const int txtUsuario = 2131230894;
+			// aapt resource value: 0x7f0800af
+			public const int txtUsuario = 2131230895;
 			
 			// aapt resource value: 0x7f0800a6
 			public const int txtequipo = 2131230886;
@@ -2951,14 +2954,14 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08009a
 			public const int txtidEvento = 2131230874;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int txtidparticipante = 2131230915;
-			
-			// aapt resource value: 0x7f0800a7
-			public const int txtlogin = 2131230887;
+			// aapt resource value: 0x7f0800c4
+			public const int txtidparticipante = 2131230916;
 			
 			// aapt resource value: 0x7f0800a8
-			public const int txtpassword = 2131230888;
+			public const int txtlogin = 2131230888;
+			
+			// aapt resource value: 0x7f0800a9
+			public const int txtpassword = 2131230889;
 			
 			// aapt resource value: 0x7f0800a5
 			public const int txtratingbar = 2131230885;
@@ -2981,8 +2984,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f0800a0
 			public const int viewpager = 2131230880;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int visible = 2131230918;
+			// aapt resource value: 0x7f0800c7
+			public const int visible = 2131230919;
 			
 			// aapt resource value: 0x7f08003b
 			public const int withText = 2131230779;
