@@ -55,15 +55,14 @@ namespace EventoDeportivoCibertecApp.droid
 
         private void ListModalidad_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var id = e.View.FindViewById<TextView>(Resource.Id.txtidmodalidad);
-
+            var id = e.View.FindViewById<TextView>(Resource.Id.txtidparticipante);
 
 
             Toast.MakeText(this, id.Text, ToastLength.Long).Show();
 
-            var activity2 = new Intent(this, typeof(EquiposActivity));
+            var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
 
-            activity2.PutExtra("idequipo", id.Text);
+            activity2.PutExtra("idparticipante", id.Text);
 
            StartActivity(activity2);
 

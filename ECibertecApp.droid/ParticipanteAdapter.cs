@@ -52,8 +52,17 @@ namespace ECibertecApp.droid
             var item = this[position];
 
             // var item = _eventolist[position];
+
+
+           
             view.FindViewById<TextView>(Resource.Id.txtNombresApellidos).Text = item.nombres + " " + item.apellidos;
-            /*view.FindViewById<TextView>(Resource.Id.txtSedeEvento).Text = item.lugar;
+            view.FindViewById<TextView>(Resource.Id.txtidparticipante).Text = item.id_participante.ToString();
+            //oculta el textview
+            var text = view.FindViewById<TextView>(Resource.Id.txtidparticipante);
+            text.Visibility = ViewStates.Gone;
+            //oculta el textview
+
+            /*
             view.FindViewById<TextView>(Resource.Id.txtNombreEvento).Text = item.nombre_evento;*/
 
             return view;

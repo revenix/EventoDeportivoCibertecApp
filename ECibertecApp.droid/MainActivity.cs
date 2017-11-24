@@ -136,9 +136,6 @@ namespace ECibertecApp.droid
                 case Android.Resource.Id.Home:
                     mDrawerLayout.OpenDrawer((int)GravityFlags.Left);
                     return true;
-                case Android.Resource.Id.Message:
-                    
-                    return true;
                 default:
                     return base.OnOptionsItemSelected(item);
             }

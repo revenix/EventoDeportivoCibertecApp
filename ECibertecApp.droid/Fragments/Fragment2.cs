@@ -48,7 +48,7 @@ namespace ECibertecApp.droid.Fragments
             {
                 var dato = await controller.ListParticipantes();
 
-                listParticipante.ItemClick += ListEvento_ItemClick;
+                listParticipante.ItemClick += ListParticipante_ItemClick;
 
                 listParticipante.Adapter = new ParticipanteAdapter(this.Activity, dato);
             }
@@ -59,10 +59,15 @@ namespace ECibertecApp.droid.Fragments
             }
         }
 
-        private void ListEvento_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        private void ListParticipante_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            var id = e.View.FindViewById<TextView>(Resource.Id.txtidparticipante);
 
-            Toast.MakeText(this.Activity , "action", ToastLength.Long).Show();
+            Toast.MakeText(this.Activity , id.Text, ToastLength.Long).Show();
+            var activity2 = new Intent(this.Activity, typeof(InfoParticipanteActivity));
+            activity2.PutExtra("idparticipante", id.Text);
+
+            StartActivity(activity2);
 
         }
     }

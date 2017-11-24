@@ -2528,8 +2528,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08008c
 			public const int container = 2131230860;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int contentFrame = 2131230916;
+			// aapt resource value: 0x7f0800c5
+			public const int contentFrame = 2131230917;
 			
 			// aapt resource value: 0x7f080065
 			public const int contentPanel = 2131230821;
@@ -2672,14 +2672,17 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080060
 			public const int list_item = 2131230816;
 			
-			// aapt resource value: 0x7f0800c6
-			public const int masked = 2131230918;
+			// aapt resource value: 0x7f0800ca
+			public const int logout = 2131230922;
+			
+			// aapt resource value: 0x7f0800c7
+			public const int masked = 2131230919;
 			
 			// aapt resource value: 0x7f0800b5
 			public const int media_actions = 2131230901;
 			
-			// aapt resource value: 0x7f0800c3
-			public const int message = 2131230915;
+			// aapt resource value: 0x7f0800c4
+			public const int message = 2131230916;
 			
 			// aapt resource value: 0x7f080030
 			public const int middle = 2131230768;
@@ -2690,11 +2693,11 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f080026
 			public const int multiply = 2131230758;
 			
-			// aapt resource value: 0x7f0800c7
-			public const int nav_home = 2131230919;
+			// aapt resource value: 0x7f0800c9
+			public const int nav_equipo = 2131230921;
 			
 			// aapt resource value: 0x7f0800c8
-			public const int nav_messages = 2131230920;
+			public const int nav_perfil = 2131230920;
 			
 			// aapt resource value: 0x7f0800ab
 			public const int nav_view = 2131230891;
@@ -2948,6 +2951,9 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f08009a
 			public const int txtidEvento = 2131230874;
 			
+			// aapt resource value: 0x7f0800c3
+			public const int txtidparticipante = 2131230915;
+			
 			// aapt resource value: 0x7f0800a7
 			public const int txtlogin = 2131230887;
 			
@@ -2975,8 +2981,8 @@ namespace ECibertecApp.droid
 			// aapt resource value: 0x7f0800a0
 			public const int viewpager = 2131230880;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int visible = 2131230917;
+			// aapt resource value: 0x7f0800c6
+			public const int visible = 2131230918;
 			
 			// aapt resource value: 0x7f08003b
 			public const int withText = 2131230779;

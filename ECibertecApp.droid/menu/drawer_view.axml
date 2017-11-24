@@ -3,11 +3,11 @@
 
   <group android:checkableBehavior="single">
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_perfil"
         android:icon="@drawable/login"
         android:title="Mi Perfil" />
     <item
-        android:id="@+id/nav_messages"
+        android:id="@+id/nav_equipo"
         android:icon="@drawable/ic_team"
         android:title="Mi Equipo" />
   </group>
@@ -15,6 +15,7 @@
   <item android:title="Cuenta">
     <menu>
       <item
+        android:id="@+id/logout"
           android:icon="@drawable/ic_logout"
           android:title="Cerrar Session" />
       

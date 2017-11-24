@@ -25,7 +25,7 @@
             android:id="@+id/txtNombres"
             android:text="zx"
             android:textStyle="bold"
-            android:textColor="#111111"
+            android:textColor="#FFFFFF"
             android:textSize="27dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
