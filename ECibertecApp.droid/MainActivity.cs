@@ -16,6 +16,7 @@ using ECibertecApp.droid.Fragments;
 using ZXing.Mobile;
 using Android.Widget;
 using Android.Content;
+using EventoDeportivoCibertecApp.portable;
 
 namespace ECibertecApp.droid
 {
@@ -24,14 +25,14 @@ namespace ECibertecApp.droid
     {
         private DrawerLayout mDrawerLayout;
         TextView txtusuario;
-        
+
+        Services controller = new Services();
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             Window.RequestFeature(WindowFeatures.NoTitle);
-
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
             //inicia el qr
@@ -81,30 +82,32 @@ namespace ECibertecApp.droid
                         .SetAction("SCAN", async v =>
                         {
                             //Do something here
-                            //Intent intent = new Intent(fab.Context, typeof(MainActivity /*BottomSheetActivity*/ ));//agregar algun activiti a mostrar
-                            //  StartActivity(intent);
-
                             //lector de QR
                             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
                             var result = await scanner.Scan();
 
                             if (result != null)
                             {
-                                var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
-                                activity2.PutExtra("idparticipante", result.Text);
+                                var dato = await controller.ParticipanteInfo(int.Parse(result.ToString()));
 
-                                StartActivity(activity2);
-                                // activity2.PutExtra("idparticipante", result.Text);
+                                if (dato != null)
+                                {
+                                    var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+                                    activity2.PutExtra("idparticipante", result.Text);
 
-                                //  StartActivity(activity2);
-
-                                //Toast.MakeText(this, result.Text, ToastLength.Long).Show();
+                                    StartActivity(activity2);
+                                }
+                                else
+                                {
+                                    Toast.MakeText(this, "Participante no encontrado", ToastLength.Long).Show();
+                                }
                             }
                             else
                             {
                                Toast.MakeText(this, "Participante no encontrado", ToastLength.Long).Show();
                             }
                             //lector de QR
+
                         })
                         .Show();
             };
