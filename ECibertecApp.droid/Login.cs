@@ -8,7 +8,7 @@ using Android.Content;
 
 namespace ECibertecApp.droid
 {
-    [Activity( MainLauncher = true)]
+    [Activity( MainLauncher = true , Icon = "@drawable/ic_iconapp")]
     public class Login : Activity
     {
 

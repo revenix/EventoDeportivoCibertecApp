@@ -123,7 +123,7 @@ namespace ECibertecApp.droid
             TabAdapter adapter = new TabAdapter(SupportFragmentManager);
             adapter.AddFragment(new Fragment1(), "Eventos");
             adapter.AddFragment(new Fragment2(), "Participantes");
-            adapter.AddFragment(new Fragment3(), "Fragment 3");
+            adapter.AddFragment(new Fragment3(), "Modalidades");
 
             viewPager.Adapter = adapter;
         }
@@ -136,7 +136,9 @@ namespace ECibertecApp.droid
                 case Android.Resource.Id.Home:
                     mDrawerLayout.OpenDrawer((int)GravityFlags.Left);
                     return true;
-
+                case Android.Resource.Id.Message:
+                    
+                    return true;
                 default:
                     return base.OnOptionsItemSelected(item);
             }
