@@ -63,7 +63,7 @@ namespace ECibertecApp.droid.Fragments
         {
             var id = e.View.FindViewById<TextView>(Resource.Id.txtidparticipante);
 
-            Toast.MakeText(this.Activity , id.Text, ToastLength.Long).Show();
+            //Toast.MakeText(this.Activity , id.Text, ToastLength.Long).Show();
             var activity2 = new Intent(this.Activity, typeof(InfoParticipanteActivity));
             activity2.PutExtra("idparticipante", id.Text);
 

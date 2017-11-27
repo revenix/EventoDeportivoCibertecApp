@@ -52,7 +52,7 @@ namespace ECibertecApp.droid.Fragments
             /*var activity2 = new Intent(this, typeof(ModalidadesActivity));
              activity2.PutExtra("idmodalidad", id.Text);
              StartActivity(activity2);*/
-            Toast.MakeText(this.Activity, "id de evento : " + id.Text, ToastLength.Long).Show();
+          //  Toast.MakeText(this.Activity, "id de evento : " + id.Text, ToastLength.Long).Show();
 
         }
 
