@@ -9,7 +9,8 @@ namespace EDCibertecAppWebApiRest.Models
 {
    public class Usuario
     {
-        
+        public int id_participante { get; set; }
+
         public string nombres { get; set; }
         
         public string apellidos { get; set; }

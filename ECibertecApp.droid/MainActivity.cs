@@ -20,11 +20,13 @@ using EventoDeportivoCibertecApp.portable;
 
 namespace ECibertecApp.droid
 {
-    [Activity(Label = "ECibertecApp.droid", Theme = "@style/Theme.DesignDemo")]
+    [Activity( Theme = "@style/Theme.DesignDemo")]
     public class MainActivity : AppCompatActivity //cambiar a AppCompatActivity para usar el SetSupportActionBar,SupportActionBar
     {
         private DrawerLayout mDrawerLayout;
-        TextView txtusuario;
+
+        string nombre_usuario;
+        string id_participante;
 
         Services controller = new Services();
 
@@ -38,13 +40,12 @@ namespace ECibertecApp.droid
             //inicia el qr
             MobileBarcodeScanner.Initialize(Application);
             //termina qr
-            
-           /* //envio el usuario
-            txtusuario = FindViewById<EditText>(Resource.Id.txtUsuario);
-            string nombre = Intent.GetStringExtra("nombreparticipante");
-            txtusuario.Text = nombre;
-            //envio el usuario
-            */
+            //obtengo los extra
+            nombre_usuario = Intent.GetStringExtra("nombreparticipante");
+            id_participante = Intent.GetStringExtra("idparticipante");
+
+            //obtengo los extra
+
 
 
 
@@ -123,7 +124,7 @@ namespace ECibertecApp.droid
             TabAdapter adapter = new TabAdapter(SupportFragmentManager);
             adapter.AddFragment(new Fragment1(), "Eventos");
             adapter.AddFragment(new Fragment2(), "Participantes");
-            adapter.AddFragment(new Fragment3(), "Modalidades");
+          //  adapter.AddFragment(new Fragment3(), "Modalidades");
 
             viewPager.Adapter = adapter;
         }
@@ -131,6 +132,11 @@ namespace ECibertecApp.droid
        
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
+            
+
+            var txtusuario = FindViewById<TextView>(Resource.Id.txtUsuario);
+            txtusuario.Text = nombre_usuario ;
+
             switch (item.ItemId)
             {
                 case Android.Resource.Id.Home:
@@ -146,21 +152,30 @@ namespace ECibertecApp.droid
         {
             navigationView.NavigationItemSelected += (object sender, NavigationView.NavigationItemSelectedEventArgs e) =>
             {
-                var med = FindViewById<TextView>(Resource.Id.txtUsuario);
-                med.Text = "salio";
+               
 
                 //menu option
                 switch (e.MenuItem.ItemId)
                 {
                     case Resource.Id.nav_equipo:
-                        Toast.MakeText(this, "nav equipo", ToastLength.Short).Show();
+                        var inten = new Intent(this, typeof(infoEquipo));
+                        inten.PutExtra("idparticipante", id_participante);
+                        StartActivity(inten);
                         break;
                     case Resource.Id.nav_perfil:
-                        Toast.MakeText(this, "nav perfil", ToastLength.Short).Show();
+
+                        var activity2 = new Intent(this, typeof(InfoParticipanteActivity));
+                        activity2.PutExtra("idparticipante", id_participante);
+                        StartActivity(activity2);
+
                         break;
 
                     default:
-                        Toast.MakeText(this, "default", ToastLength.Short).Show();
+
+                        Intent loginPageIntent = new Intent(this, typeof(Login));
+                        //logout
+                        loginPageIntent.AddFlags(ActivityFlags.ClearTop);
+                        StartActivity(loginPageIntent);
 
                         break;
                 }

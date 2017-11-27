@@ -41,5 +41,35 @@ namespace EDCibertecAppWebApiRest.Controllers
             }
 
         }
+
+
+
+        [HttpGet]
+
+        [Route("infoequipo")]
+        public IHttpActionResult GetinfoEquipo(int id)
+        {
+            try
+            {
+                var query = from s in db.sp_equipoxparticipante(id)
+
+                            select new Equipoxparticipante()
+                            {
+                                id_equipo = s.id_equipo,
+                                nombre = s.nombre,
+                               colorUniforme=s.color_uniforme
+
+                            };
+
+                return Ok(query.FirstOrDefault());
+                //query.FirstOrDefault();
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
     }
 }

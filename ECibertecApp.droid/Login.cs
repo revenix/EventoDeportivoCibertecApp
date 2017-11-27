@@ -51,18 +51,21 @@ namespace ECibertecApp.droid
 
                     if (tipoUsuario.Equals("Administrador"))
                     {
-                        Toast.MakeText(this, "Bienvenido " + dato.nombres, ToastLength.Short).Show();
+                        Toast.MakeText(this, "Bienvenido " + dato.nombres +" "+ dato.apellidos , ToastLength.Short).Show();
 
                         var activity2 = new Intent(this, typeof(MainActivity));
-                       // activity2.PutExtra("nombreparticipante", dato.nombres);
+                        activity2.PutExtra("nombreparticipante", dato.nombres + " " + dato.apellidos);
+                        activity2.PutExtra("idparticipante", dato.id_participante.ToString());
 
                         StartActivity(activity2);
+
                     }
                     else
                     {
-                        Toast.MakeText(this, "Bienvenido  " + dato.nombres, ToastLength.Short).Show();
+                        Toast.MakeText(this, "Bienvenido  " + dato.nombres + " " + dato.apellidos, ToastLength.Short).Show();
                         var activity2 = new Intent(this, typeof(MainActivity));
-                       // activity2.PutExtra("nombreparticipante", dato.nombres);
+                      activity2.PutExtra("nombreparticipante", dato.nombres + " " + dato.apellidos);
+                       activity2.PutExtra("idparticipante", dato.id_participante.ToString());
 
                         StartActivity(activity2);
                     }

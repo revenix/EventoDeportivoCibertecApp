@@ -367,6 +367,9 @@
         <Function Name="sp_EliminaUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_equipoxparticipante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_listaEquipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -922,6 +925,9 @@
           <FunctionImport Name="sp_EliminaUsuario">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_equipoxparticipante" ReturnType="Collection(EventoDeportivoCibertecModel.sp_equipoxparticipante_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="sp_listaEquipos" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaEquipos_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -949,6 +955,11 @@
             <Parameter Name="idrol" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="sp_equipoxparticipante_Result">
+          <Property Type="Int32" Name="id_equipo" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="color_uniforme" Nullable="false" MaxLength="45" />
+        </ComplexType>
         <ComplexType Name="sp_listaEquipos_Result">
           <Property Type="Int32" Name="num_ficha" Nullable="false" />
           <Property Type="Int32" Name="id_equipo" Nullable="false" />
@@ -988,6 +999,7 @@
           <Property Type="String" Name="valoracion" Nullable="true" MaxLength="2" />
         </ComplexType>
         <ComplexType Name="sp_login_Result">
+          <Property Type="Int32" Name="id_participante" Nullable="false" />
           <Property Type="String" Name="nombres" Nullable="false" MaxLength="45" />
           <Property Type="String" Name="apellidos" Nullable="false" MaxLength="45" />
           <Property Type="Int32" Name="id_perfil" Nullable="false" />
@@ -1185,6 +1197,15 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_BuscaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_BuscaUsuario" />
           <FunctionImportMapping FunctionImportName="sp_EliminaUsuario" FunctionName="EventoDeportivoCibertecModel.Store.sp_EliminaUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_equipoxparticipante" FunctionName="EventoDeportivoCibertecModel.Store.sp_equipoxparticipante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_equipoxparticipante_Result">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="color_uniforme" ColumnName="color_uniforme" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_listaEquipos" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaEquipos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_listaEquipos_Result">
@@ -1251,6 +1272,7 @@
           <FunctionImportMapping FunctionImportName="sp_login" FunctionName="EventoDeportivoCibertecModel.Store.sp_login">
             <ResultMapping>
               <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_login_Result">
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
                 <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />

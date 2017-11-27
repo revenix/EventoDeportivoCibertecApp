@@ -40,6 +40,7 @@ namespace EDCibertecAppWebApiRest.Controllers
 
                             select new Usuario()
                             {
+                                id_participante = u.id_participante,
                                 nombres = u.nombres,
                                 apellidos = u.apellidos,
                                 id_perfil = u.id_perfil,

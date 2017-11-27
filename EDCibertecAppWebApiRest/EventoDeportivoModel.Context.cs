@@ -62,6 +62,15 @@ namespace EDCibertecAppWebApiRest
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_EliminaUsuario", idParameter);
         }
     
+        public virtual ObjectResult<sp_equipoxparticipante_Result> sp_equipoxparticipante(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_equipoxparticipante_Result>("sp_equipoxparticipante", idParameter);
+        }
+    
         public virtual ObjectResult<sp_listaEquipos_Result> sp_listaEquipos(Nullable<int> id)
         {
             var idParameter = id.HasValue ?

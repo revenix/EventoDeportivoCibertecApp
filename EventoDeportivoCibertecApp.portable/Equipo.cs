@@ -12,4 +12,12 @@ namespace EventoDeportivoCibertecApp.portable
 
         
     }
+
+    public class Equipoxparticipante
+    {
+        public int id_equipo { get; set; }
+        public string nombre { get; set; }
+        public string colorUniforme { get; set; }
+
+    }
 }

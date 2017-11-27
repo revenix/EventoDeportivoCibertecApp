@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using EventoDeportivoCibertecApp.portable;
+using System.Threading.Tasks;
 
 namespace ECibertecApp.droid
 {
@@ -42,7 +43,7 @@ namespace ECibertecApp.droid
 
 
             string idparticipante = Intent.GetStringExtra("idparticipante");
-            Toast.MakeText(this, idparticipante, ToastLength.Long).Show();
+          //  Toast.MakeText(this, idparticipante, ToastLength.Long).Show();
 
 
             var dato = await controller.ParticipanteInfo(int.Parse(idparticipante));
@@ -57,6 +58,7 @@ namespace ECibertecApp.droid
                 equipo.Text = dato.nombre;
             }
         }
+       
 
         private void BtnAtras_Click(object sender, EventArgs e)
         {

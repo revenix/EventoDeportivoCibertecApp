@@ -9,6 +9,8 @@ namespace EventoDeportivoCibertecApp.portable
 {
    public class Usuario
     {
+        public int id_participante { get; set; }
+
         public string apellidos { get; set; }
         public string descripcion { get; set; }
         public int id_perfil { get; set; }

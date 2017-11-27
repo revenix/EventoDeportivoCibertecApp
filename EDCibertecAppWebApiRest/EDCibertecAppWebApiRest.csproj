@@ -217,6 +217,9 @@
     <Compile Include="sede.cs">
       <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_equipoxparticipante_Result.cs">
+      <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_listaEquipos_Result.cs">
       <DependentUpon>EventoDeportivoModel.tt</DependentUpon>
     </Compile>
