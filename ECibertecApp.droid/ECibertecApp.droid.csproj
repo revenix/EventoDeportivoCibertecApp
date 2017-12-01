@@ -126,6 +126,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModalidaAdapter.cs" />
     <Compile Include="infoEquipo.cs" />
     <Compile Include="InfoParticipanteActivity.cs" />
     <Compile Include="ParticipanteAdapter.cs" />
@@ -178,6 +179,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\infoEquipo.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ModalidadListItem.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

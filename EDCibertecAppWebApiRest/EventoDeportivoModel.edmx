@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EventoDeportivoCibertecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EventoDeportivoCibertecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sede">
           <Key>
             <PropertyRef Name="id_Sede" />
@@ -373,6 +373,7 @@
         <Function Name="sp_listaEquipos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_listaModalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_listaModalidades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -479,8 +480,7 @@
             <End Role="tb_usuario" EntitySet="tb_usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventoDeportivoCibertecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -920,22 +920,22 @@
             <End Role="tb_subMenu" EntitySet="tb_subMenu" />
           </AssociationSet>
           <FunctionImport Name="sp_BuscaUsuario">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_EliminaUsuario">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_equipoxparticipante" ReturnType="Collection(EventoDeportivoCibertecModel.sp_equipoxparticipante_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_listaEquipos" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaEquipos_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_listaModalidades" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaModalidades_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_listaParticipantexEquipo" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaParticipantexEquipo_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ListarDisciplinas" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarDisciplinas_Result)" />
           <FunctionImport Name="sp_ListarEventos" ReturnType="Collection(EventoDeportivoCibertecModel.sp_ListarEventos_Result)" />
@@ -946,7 +946,7 @@
             <Parameter Name="clave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Participanteinfo" ReturnType="Collection(EventoDeportivoCibertecModel.sp_Participanteinfo_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_RegistrarUsuarios">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -954,6 +954,7 @@
             <Parameter Name="contraseña" Mode="In" Type="String" />
             <Parameter Name="idrol" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_listaModalidad" ReturnType="Collection(EventoDeportivoCibertecModel.sp_listaModalidad_Result)" />
         </EntityContainer>
         <ComplexType Name="sp_equipoxparticipante_Result">
           <Property Type="Int32" Name="id_equipo" Nullable="false" />
@@ -1012,6 +1013,13 @@
           <Property Type="String" Name="sexo" Nullable="false" MaxLength="45" />
           <Property Type="String" Name="valoracion" Nullable="true" MaxLength="2" />
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="45" />
+        </ComplexType>
+        <ComplexType Name="sp_listaModalidad_Result">
+          <Property Type="Int32" Name="id_modalidad" Nullable="false" />
+          <Property Type="Int32" Name="id_disciplina" Nullable="false" />
+          <Property Type="String" Name="deporte" Nullable="false" MaxLength="45" />
+          <Property Type="Int32" Name="id_categoria" Nullable="false" />
+          <Property Type="String" Name="categoria" Nullable="false" MaxLength="45" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1293,6 +1301,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_RegistrarUsuarios" FunctionName="EventoDeportivoCibertecModel.Store.sp_RegistrarUsuarios" />
+          <FunctionImportMapping FunctionImportName="sp_listaModalidad" FunctionName="EventoDeportivoCibertecModel.Store.sp_listaModalidad">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EventoDeportivoCibertecModel.sp_listaModalidad_Result">
+                <ScalarProperty Name="id_modalidad" ColumnName="id_modalidad" />
+                <ScalarProperty Name="id_disciplina" ColumnName="id_disciplina" />
+                <ScalarProperty Name="deporte" ColumnName="deporte" />
+                <ScalarProperty Name="id_categoria" ColumnName="id_categoria" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

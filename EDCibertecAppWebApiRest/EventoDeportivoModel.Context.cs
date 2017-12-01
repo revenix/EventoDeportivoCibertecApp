@@ -160,5 +160,10 @@ namespace EDCibertecAppWebApiRest
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistrarUsuarios", idParameter, loginParameter, contraseñaParameter, idrolParameter);
         }
+    
+        public virtual ObjectResult<sp_listaModalidad_Result> sp_listaModalidad()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_listaModalidad_Result>("sp_listaModalidad");
+        }
     }
 }
